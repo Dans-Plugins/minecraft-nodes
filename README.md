@@ -10,7 +10,7 @@ Nodes is a Minecraft plugin that adds a territory-based geopolitics system to yo
 
 ### First Time Installation
 
-1. Download the latest release JAR from the [Releases page](https://github.com/dmccoystephenson/minecraft-nodes/releases).
+1. Download the latest release JAR from the [Releases page](https://github.com/Dans-Plugins/minecraft-nodes/releases).
 2. Place `nodes-VERSION.jar` in the `plugins` folder of your Paper/Spigot server.
 3. Restart your server.
 
@@ -39,9 +39,9 @@ You can find the support Discord server [here](https://discord.gg/xXtuAQ2).
 
 ### Experiencing a bug?
 
-Please fill out a bug report [here](https://github.com/dmccoystephenson/minecraft-nodes/issues/new).
+Please fill out a bug report [here](https://github.com/Dans-Plugins/minecraft-nodes/issues/new).
 
-- [Known Bugs](https://github.com/dmccoystephenson/minecraft-nodes/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
+- [Known Bugs](https://github.com/Dans-Plugins/minecraft-nodes/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
 
 ## Contributing
 
@@ -50,23 +50,23 @@ Please fill out a bug report [here](https://github.com/dmccoystephenson/minecraf
 
 ## Testing
 
-### Unit Tests
+There is no automated test suite yet — adding one is tracked in [issue #10](https://github.com/Dans-Plugins/minecraft-nodes/issues/10). The build is currently the only automated check: it compiles the Kotlin sources and runs `ktlintCheck`.
 
 Linux:
 
 ```
 cd nodes
-./gradlew clean test
+./gradlew clean build
 ```
 
 Windows:
 
 ```
 cd nodes
-.\gradlew.bat clean test
+.\gradlew.bat clean build
 ```
 
-If you see `BUILD SUCCESSFUL`, the tests have passed.
+`BUILD SUCCESSFUL` means the plugin compiles and is style-clean. It does not mean any behaviour has been verified. To check behaviour, build the JAR and run it on a local Paper/Spigot server as described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Development
 
