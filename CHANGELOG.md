@@ -6,7 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Removed
+
+- Deleted `.github/workflows/build.yml`, which triggered only on the nonexistent `main` and `develop` branches and duplicated the `nodes/` build already performed by `.github/workflows/main.yml`.
+
 ### Fixed
+
+- `nodes/gradlew` is now tracked with the executable bit set, so `./gradlew` runs from a fresh clone without a preparatory `chmod`. The workaround `chmod` steps have been removed from `.github/workflows/main.yml` and `.github/workflows/release.yml`.
 
 - Corrected `README.md` and `CONTRIBUTING.md` links that pointed at `dmccoystephenson/minecraft-nodes` instead of `Dans-Plugins/minecraft-nodes`.
 - Removed instructions to run a unit test suite that does not exist; `README.md` and `CONTRIBUTING.md` now describe the build and the manual server test as the actual verification steps.
