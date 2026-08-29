@@ -108,11 +108,11 @@ Common sub-commands:
 **Permission:** `nodes.command.peace`  
 **Usage:** `/peace help`
 
-### /truce
+### /truce \[town\]
 
-**Description:** View active truces and the time remaining on each.  
+**Description:** View active truces and the time remaining on each, for your own town or a named town.  
 **Permission:** `nodes.command.truce`  
-**Usage:** `/truce`
+**Usage:** `/truce` or `/truce <town>`
 
 ---
 

@@ -8,7 +8,7 @@ commands:
     description: Admin commands for Nodes
     aliases: [nda]
     permission: nodes.admin
-    usage: /nodesadmin help or /na help
+    usage: /nodesadmin help or /nda help
   town:
     description: Manage player towns (Nodes)
     aliases: [t]
@@ -48,7 +48,7 @@ commands:
     description: View truce list and times remaining
     aliases: []
     permission: nodes.command.truce
-    usage: /peace help
+    usage: /truce [town]
   globalchat:
     description: Set player chat to global
     aliases: [gc]
