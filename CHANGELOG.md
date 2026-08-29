@@ -6,13 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-### Removed
-
-- Deleted `.github/workflows/build.yml`, which triggered only on the nonexistent `main` and `develop` branches and duplicated the `nodes/` build already performed by `.github/workflows/main.yml`.
-
 ### Changed
 
 - Replaced the archived `actions-rs/toolchain@v1` action with `dtolnay/rust-toolchain@stable`, and bumped `actions/checkout`, `actions/setup-java`, and `actions/setup-node` to `v5` in `.github/workflows/main.yml` and `.github/workflows/release.yml`, clearing the Node.js 20 runtime and `set-output` deprecation warnings.
+
+### Removed
+
+- Deleted `.github/workflows/build.yml`, which triggered only on the nonexistent `main` and `develop` branches and duplicated the `nodes/` build already performed by `.github/workflows/main.yml`.
 
 ### Fixed
 
