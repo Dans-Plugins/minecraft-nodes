@@ -16,6 +16,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- Added `.kotlin` to `nodes/.gitignore` so the compiler-state directory written by the Kotlin 2.x Gradle plugin during a build is not shown as untracked or accidentally staged.
+- Listed Java JDK 21 under the requirements in `CONTRIBUTING.md`; the requirement was stated in `README.md` but omitted from the contributor guide, and the build fails dependency resolution on older JDKs.
 - Corrected the `usage` string for `/nodesadmin` in `plugin.yml`, which advertised an unregistered `/na` alias instead of the registered `/nda`.
 - Corrected the `usage` string for `/truce` in `plugin.yml`, which had been copied from `/peace` and told players to run `/peace help`.
 - Documented the optional town argument accepted by `/truce` in `COMMANDS.md`.
