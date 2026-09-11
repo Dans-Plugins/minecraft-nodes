@@ -13,6 +13,7 @@ Thank you for your interest in contributing to Minecraft Nodes! This guide will 
 
 - A GitHub account
 - Git installed on your local machine
+- Java JDK 21 (the Paper 1.21 dev bundle will not resolve on older JDKs)
 - A Java IDE or text editor
 - A basic understanding of Kotlin
 
