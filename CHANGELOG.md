@@ -16,6 +16,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- Corrected the `/town`, `/nation`, and `/port` sub-command tables in `COMMANDS.md`, which listed sub-commands that do not exist (`/town sethome`, `/town home`, `/town setleader`, `/nation join`, `/nation kick`, `/nation setleader`) and omitted many that do (`/town setspawn`, `/town spawn`, `/town leader`, `/town apply`, `/town accept`, `/nation accept`, `/nation capital`, `/port info`, and others). Added the `/nodes` sub-command table.
+- Corrected the diplomacy command entries in `COMMANDS.md`: `/ally`, `/unally`, `/war`, and `/peace` take a town or nation name directly rather than a sub-command, and print help when run with no arguments.
+- Corrected the `USER_GUIDE.md` walkthroughs, which told players to run the nonexistent `/town sethome`, `/war declare`, and `/peace request`.
 - Added `.kotlin` to `nodes/.gitignore` so the compiler-state directory written by the Kotlin 2.x Gradle plugin during a build is not shown as untracked or accidentally staged.
 - Listed Java JDK 21 under the requirements in `CONTRIBUTING.md`; the requirement was stated in `README.md` but omitted from the contributor guide, and the build fails dependency resolution on older JDKs.
 - Corrected the `usage` string for `/nodesadmin` in `plugin.yml`, which advertised an unregistered `/na` alias instead of the registered `/nda`.
