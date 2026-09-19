@@ -20,28 +20,28 @@ After installing the plugin and starting your server:
 
 ### Creating a Town
 
-1. Find a location for your town's home block.
-2. Run `/town create <name>` to create a town.
-3. Use `/town sethome` to set the town's home point.
-4. Invite players with `/town invite <player>`.
+1. Stand in the territory you want as your town's home.
+2. Run `/town create <name>` to create a town there.
+3. Use `/town setspawn` to set the town's spawn point (players teleport to it with `/town spawn`).
+4. Invite players with `/town invite <player>`; they join with `/town accept`.
 
 ### Claiming Territory
 
-1. Stand in the chunk you want to claim.
-2. Run `/town claim` to claim the chunk for your town.
+1. Stand in the territory you want to claim. It must neighbor one of your existing claims.
+2. Run `/town claim` to claim the territory for your town.
 3. Check your town's remaining claim power with `/town info`.
 
 ### Forming a Nation
 
-1. As a town leader, run `/nation create <name>` to create a nation.
-2. Invite other towns with `/nation invite <town>`.
+1. As a town leader, run `/nation create <name>` to create a nation with your town as its capital.
+2. Invite other towns with `/nation invite <town>`; the invited town's leader accepts with `/nation accept`.
 
 ### Declaring War
 
-1. Run `/war declare <town|nation>` to declare war on another town or nation.
+1. Run `/war <town|nation>` to declare war on another town or nation.
 2. During war, plant a flag in an enemy chunk to begin capturing it.
 3. Defend your own chunks by breaking enemy flags.
-4. End the conflict with `/peace request <town|nation>` to offer peace.
+4. End the conflict with `/peace <town|nation>`, which opens a peace treaty GUI. The other side opens the same treaty with `/peace <your town|nation>`, and both parties negotiate and confirm the terms there.
 
 ### Using Chat Channels
 
