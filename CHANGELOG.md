@@ -24,6 +24,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Corrected the `usage` string for `/nodesadmin` in `plugin.yml`, which advertised an unregistered `/na` alias instead of the registered `/nda`.
 - Corrected the `usage` string for `/truce` in `plugin.yml`, which had been copied from `/peace` and told players to run `/peace help`.
 - Documented the optional town argument accepted by `/truce` in `COMMANDS.md`.
+- Corrected the `usage` strings for `/ally`, `/unally`, `/war`, and `/peace` in `plugin.yml`, which advertised a `help` sub-command that none of the executors accepts (`/war help` replied `Town or nation "help" does not exist`).
+- Corrected the `/town rename` usage message, which had been copied from `/nation rename` and told players to run `/n rename`.
 - `nodes/gradlew` is now tracked with the executable bit set, so `./gradlew` runs from a fresh clone without a preparatory `chmod`. The workaround `chmod` steps have been removed from `.github/workflows/main.yml` and `.github/workflows/release.yml`.
 - Corrected `README.md` and `CONTRIBUTING.md` links that pointed at `dmccoystephenson/minecraft-nodes` instead of `Dans-Plugins/minecraft-nodes`.
 - Removed instructions to run a unit test suite that does not exist; `README.md` and `CONTRIBUTING.md` now describe the build and the manual server test as the actual verification steps.
