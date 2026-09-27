@@ -1603,7 +1603,7 @@ public class TownCommand :
         }
 
         if (args.size == 1) {
-            Message.print(player, "Usage: /n rename [new_name]")
+            Message.print(player, "Usage: /town rename [new_name]")
             return
         }
 

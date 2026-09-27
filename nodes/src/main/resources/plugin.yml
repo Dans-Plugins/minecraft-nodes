@@ -28,22 +28,22 @@ commands:
     description: Make alliance with another town/nation
     aliases: []
     permission: nodes.command.ally
-    usage: /ally help
+    usage: /ally <town> or /ally <nation>
   unally:
     description: Break alliance with another town/nation
     aliases: []
     permission: nodes.command.unally
-    usage: /unally help
+    usage: /unally <town> or /unally <nation>
   war:
     description: Declare war on another town/nation
     aliases: []
     permission: nodes.command.war
-    usage: /war help
+    usage: /war <town> or /war <nation>
   peace:
     description: Request peace with another town/nation
     aliases: []
     permission: nodes.command.peace
-    usage: /peace help
+    usage: /peace <town> or /peace <nation>
   truce:
     description: View truce list and times remaining
     aliases: []
