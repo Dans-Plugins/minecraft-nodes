@@ -127,7 +127,7 @@ disableWorldWhenLoadFails: true
 
 **Type:** integer (milliseconds)  
 **Default:** `172800000` (48 hours)  
-**Description:** Cooldown after a player leaves or disbands a town before they can create a new one.
+**Description:** Cooldown after a player deletes their town with `/town delete` (or `/town disband`) before they can create a new one. Leaving a town does not start this cooldown.
 
 ---
 
@@ -143,7 +143,7 @@ disableWorldWhenLoadFails: true
 
 **Type:** integer (ticks)  
 **Default:** `2400`  
-**Description:** How often town cooldown states are updated, in ticks.
+**Description:** Present in the default `config.yml` but not read by the plugin, so changing it has no effect. Town, resident, and truce cooldowns are updated on the [`mainPeriodicTick`](#mainperiodictick) interval.
 
 ---
 
@@ -233,7 +233,7 @@ outpostTeleportCost:
 
 ### initialOverClaimsAmountScale
 
-**Type:** float  
+**Type:** integer  
 **Default:** `2`  
 **Description:** Penalty scale applied when a town's territory cost exceeds its initial claim allowance.
 
@@ -538,7 +538,7 @@ globalResources:
 
 **Type:** boolean  
 **Default:** `true`  
-**Description:** Restricts annexation and claiming to towns on the war whitelist.
+**Description:** When enabled, only towns on the war whitelist can annex territories (`onlyWhitelistCanAnnex`) or capture chunks with war flags (`onlyWhitelistCanClaim`). Both settings only take effect while `warWhitelist` is non-empty. `onlyWhitelistCanClaim` does not affect `/town claim`.
 
 ---
 
