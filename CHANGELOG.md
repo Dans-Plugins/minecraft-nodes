@@ -16,6 +16,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- Corrected the "First Steps" section of `USER_GUIDE.md`, which implied the plugin generates `world.json`. The plugin only reads it, so a server operator must create the map with the Dynmap Editor and place it at `plugins/nodes/world.json`. The section now also describes what happens when that file is missing.
+- Corrected the `Default` column of the `USER_GUIDE.md` permissions table. It listed `true` for fifteen command nodes, but none of them is declared in `plugin.yml`, so Bukkit's default of `op` applies.
 - Corrected four `CONFIG.md` entries to match how `Config.kt` reads them. `townCreateCooldown` is started only by deleting a town, not by leaving one. `townCooldownUpdateTick` is not read by the plugin, and cooldowns tick on `mainPeriodicTick`. `initialOverClaimsAmountScale` is an integer, not a float. `onlyWhitelistCanAnnex` and `onlyWhitelistCanClaim` apply only while `warWhitelist` is non-empty, and `onlyWhitelistCanClaim` governs war-flag captures rather than `/town claim`.
 - Corrected the `/town`, `/nation`, and `/port` sub-command tables in `COMMANDS.md`, which listed sub-commands that do not exist (`/town sethome`, `/town home`, `/town setleader`, `/nation join`, `/nation kick`, `/nation setleader`) and omitted many that do (`/town setspawn`, `/town spawn`, `/town leader`, `/town apply`, `/town accept`, `/nation accept`, `/nation capital`, `/port info`, and others). Added the `/nodes` sub-command table.
 - Corrected the diplomacy command entries in `COMMANDS.md`: `/ally`, `/unally`, `/war`, and `/peace` take a town or nation name directly rather than a sub-command, and print help when run with no arguments.

@@ -13,6 +13,7 @@ Nodes is a Minecraft plugin that adds a territory-based geopolitics system to yo
 1. Download the latest release JAR from the [Releases page](https://github.com/Dans-Plugins/minecraft-nodes/releases).
 2. Place `nodes-VERSION.jar` in the `plugins` folder of your Paper/Spigot server.
 3. Restart your server.
+4. Supply a `world.json` map at `plugins/nodes/world.json` and restart again. The plugin does not generate one; see [First Steps](USER_GUIDE.md#first-steps) in the User Guide.
 
 ### Companion Plugins
 
