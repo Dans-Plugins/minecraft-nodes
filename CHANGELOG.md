@@ -16,6 +16,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- Documented the `/nodesadmin` sub-commands in `COMMANDS.md`, including the `town` and `nation` sub-command tables. The entry previously listed only the command's permission and alias.
+- Corrected the `/nodesadmin allyremove`, `truce`, and `truceremove` usage messages, which had been copied from `ally`, and the `/nodesadmin town sethomecooldown` usage message, which had been copied from `sethome`.
+- `/nodesadmin resident` with no arguments now prints the resident help instead of the town help, and that help is headed "Admin resident management" instead of "Admin town management".
 - Corrected the "First Steps" section of `USER_GUIDE.md`, which implied the plugin generates `world.json`. The plugin only reads it, so a server operator must create the map with the Dynmap Editor and place it at `plugins/nodes/world.json`. The section now also describes what happens when that file is missing.
 - Corrected the `dynmap/README.md` folder tree, which listed a nonexistent `src/dynmap_dummy/` and omitted `src/territory/`, `src/lib.rs`, and the generated `wasm/` directory. The build section now says commands run in `dynmap/` rather than "the repo root", and notes that `npm run build` starts the wasm and webpack steps concurrently.
 - Corrected the `Default` column of the `USER_GUIDE.md` permissions table. It listed `true` for fifteen command nodes, but none of them is declared in `plugin.yml`, so Bukkit's default of `op` applies.

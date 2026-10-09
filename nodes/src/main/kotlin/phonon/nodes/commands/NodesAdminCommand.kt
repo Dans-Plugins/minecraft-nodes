@@ -904,7 +904,7 @@ public class NodesAdminCommand :
     // route command to further subcommands
     private fun manageResident(sender: CommandSender, args: Array<String>) {
         if (args.size < 2) {
-            printTownHelp(sender)
+            printResidentHelp(sender)
         } else {
             // route subcommand function
             when (args[1].lowercase()) {
@@ -918,7 +918,7 @@ public class NodesAdminCommand :
     }
 
     private fun printResidentHelp(sender: CommandSender) {
-        Message.print(sender, "${ChatColor.BOLD}[Nodes] Admin town management:")
+        Message.print(sender, "${ChatColor.BOLD}[Nodes] Admin resident management:")
         Message.print(sender, "/nodesadmin resident towncooldown${ChatColor.WHITE}: Change resident town cooldown")
         Message.print(sender, "Run a command with no args to see usage.")
     }
@@ -1768,7 +1768,7 @@ public class NodesAdminCommand :
      */
     private fun setTownMoveHomeCooldown(sender: CommandSender, args: Array<String>) {
         if (args.size < 4) {
-            Message.error(sender, "Usage: /nodesadmin town sethome [name] [id]")
+            Message.error(sender, "Usage: /nodesadmin town sethomecooldown [name] [cooldown]")
             return
         }
 
@@ -2257,7 +2257,7 @@ public class NodesAdminCommand :
      */
     private fun removeAlly(sender: CommandSender, args: Array<String>) {
         if (args.size < 3) {
-            Message.error(sender, "Usage: /nodesadmin ally [name1] [name2]")
+            Message.error(sender, "Usage: /nodesadmin allyremove [name1] [name2]")
             return
         }
 
@@ -2301,7 +2301,7 @@ public class NodesAdminCommand :
      */
     private fun setTruce(sender: CommandSender, args: Array<String>) {
         if (args.size < 3) {
-            Message.error(sender, "Usage: /nodesadmin ally [name1] [name2]")
+            Message.error(sender, "Usage: /nodesadmin truce [name1] [name2]")
             return
         }
 
@@ -2345,7 +2345,7 @@ public class NodesAdminCommand :
      */
     private fun removeTruce(sender: CommandSender, args: Array<String>) {
         if (args.size < 3) {
-            Message.error(sender, "Usage: /nodesadmin ally [name1] [name2]")
+            Message.error(sender, "Usage: /nodesadmin truceremove [name1] [name2]")
             return
         }
 
