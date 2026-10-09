@@ -204,3 +204,70 @@ Sub-commands:
 **Aliases:** `/nda`  
 **Permission:** `nodes.admin`  
 **Usage:** `/nodesadmin help`
+
+Running `/nodesadmin` with no sub-command prints the plugin version and the help list. The `town`, `nation`, `port`, `portgroup`, and `resident` sub-commands print their own help when run with no further arguments.
+
+Sub-commands:
+
+| Sub-command | Description |
+|-------------|-------------|
+| `reload <config\|managers\|resources\|territory>` | Reload the config, restart the manager tasks, reload resource nodes from `world.json`, or reload territories from `world.json` (`territory *` for all, or a list of existing territory ids) |
+| `war [enable\|skirmish\|disable\|whitelist\|blacklist]` | With no argument, print the war state. `enable` starts full war, `skirmish` starts border skirmishes (no annexing, only border territories can be attacked), `disable` ends war, and `whitelist`/`blacklist` list the towns in the configured war whitelist or blacklist |
+| `town <sub-command>` | Manage towns (see below) |
+| `nation <sub-command>` | Manage nations (see below) |
+| `port <create\|delete\|addgroup\|removegroup> ...` | Create or delete a port, or add a port to or remove it from a port group |
+| `portgroup <create\|delete> <name>` | Create or delete a port group |
+| `resident towncooldown <player> <cooldown>` | Set a resident's town-create cooldown |
+| `enemy <name1> <name2>` | Make two towns or nations enemies |
+| `peace <name1> <name2>` | Remove enemy status between two towns or nations |
+| `ally <name1> <name2>` | Make two towns or nations allies |
+| `allyremove <name1> <name2>` | Remove the alliance between two towns or nations |
+| `truce <name1> <name2>` | Set a truce between two towns or nations |
+| `truceremove <name1> <name2>` | Remove the truce between two towns or nations |
+| `treaty <name1> <name2> add <occupy\|item> <side> <args...>` | Add an occupation or item term to an existing treaty. `side` is `0` for `name1` or `1` for `name2`. `remove` is accepted but not implemented |
+| `save [sync]` | Force a world save (asynchronous unless `sync` is given) |
+| `load` | Clear the in-memory world and reload it from `world.json` and the saved towns, nations, war state, and ports |
+| `runincome` | Run income for all towns immediately |
+| `playersonline` | Rebuild each town's and nation's list of online players |
+| `debug <type> <name\|id> <field>` | Print an object field to the server console. `type` is `resource`, `chunk`, `territory`, `resident`, `town`, or `nation` |
+
+`/nodesadmin town` sub-commands (`*` in place of the town name applies `incomeadd`, `incomeremove`, and `defaulttownspawns` to every town):
+
+| Sub-command | Description |
+|-------------|-------------|
+| `create <name> <id1> [id2] ...` | Create a town with no residents from a list of territory ids; the first id becomes the home territory |
+| `delete <name>` | Delete a town |
+| `addplayer <town> <player1> [player2] ...` | Add players to a town |
+| `removeplayer <town> <player1> [player2] ...` | Remove players from a town |
+| `addterritory <town> <id1> [id2] ...` | Add territories to a town, ignoring claim limits |
+| `removeterritory <town> <id1> [id2] ...` | Remove territories from a town |
+| `captureterritory <town> <id1> [id2] ...` | Make a town occupy territories |
+| `releaseterritory <id1> [id2] ...` | Release territories from their current occupier |
+| `claimsbonus <town> [value]` | Print or set a town's bonus claims |
+| `claimspenalty <town> [value]` | Print or set a town's claims penalty |
+| `claimsannex <town> [value]` | Print or set a town's annexed-claims penalty |
+| `addofficer <town> <player>` | Make a resident a town officer |
+| `removeofficer <town> <player>` | Remove a town officer |
+| `leader <town> <player>` | Make a resident the town leader |
+| `removeleader <town>` | Leave a town without a leader |
+| `open <town>` | Toggle whether a town is open to join |
+| `income <town>` | Open a town's income inventory (in game only) |
+| `incomeadd <town>` | Add the held item stack to a town's income (in game only) |
+| `incomeremove <town> [material]` | Remove one material, or all items, from a town's income (in game only) |
+| `setspawn <town>` | Set a town's spawn to your location, which must be in its home territory (in game only) |
+| `spawn <town>` | Teleport to a town's spawn (in game only) |
+| `sethome <town> <id>` | Set a town's home territory |
+| `sethomecooldown <town> <cooldown>` | Set a town's move-home cooldown |
+| `addoutpost <town> <name> <id>` | Add an outpost to a town at a territory |
+| `removeoutpost <town> <name>` | Remove a town outpost |
+| `defaulttownspawns <town>` | Reset a town's spawn to the default position in its home territory |
+
+`/nodesadmin nation` sub-commands:
+
+| Sub-command | Description |
+|-------------|-------------|
+| `create <name> <town1> [town2] ...` | Create a nation from a list of towns |
+| `delete <name>` | Delete a nation |
+| `addtown <nation> <town1> [town2] ...` | Add towns to a nation |
+| `removetown <nation> <town1> [town2] ...` | Remove towns from a nation |
+| `capital <nation> <town>` | Make a member town the nation's capital |
