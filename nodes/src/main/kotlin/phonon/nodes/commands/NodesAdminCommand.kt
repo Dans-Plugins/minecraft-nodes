@@ -483,15 +483,18 @@ public class NodesAdminCommand :
         Message.print(sender, "/nodesadmin nation${ChatColor.WHITE}: Manage nations (see \"/nodesadmin nation help\")")
         Message.print(sender, "/nodesadmin portgroup${ChatColor.WHITE}: Manage port groups (see \"/nodesadmin portgroup help\")")
         Message.print(sender, "/nodesadmin port${ChatColor.WHITE}: Manage ports (see \"/nodesadmin port help\")")
+        Message.print(sender, "/nodesadmin resident${ChatColor.WHITE}: Manage residents (see \"/nodesadmin resident help\")")
         Message.print(sender, "/nodesadmin enemy${ChatColor.WHITE}: Make two towns/nations enemies")
         Message.print(sender, "/nodesadmin peace${ChatColor.WHITE}: Sets peace between two towns/nations")
         Message.print(sender, "/nodesadmin ally${ChatColor.WHITE}: Sets alliance between two towns/nations")
         Message.print(sender, "/nodesadmin allyremove${ChatColor.WHITE}: Removes alliance between two towns/nations")
         Message.print(sender, "/nodesadmin truce${ChatColor.WHITE}: Sets truce between two towns/nations")
         Message.print(sender, "/nodesadmin truceremove${ChatColor.WHITE}: Removes truce between two towns/nations")
+        Message.print(sender, "/nodesadmin treaty${ChatColor.WHITE}: Add terms to an existing treaty between two towns/nations")
         Message.print(sender, "/nodesadmin save${ChatColor.WHITE}: Force save world")
         Message.print(sender, "/nodesadmin load${ChatColor.WHITE}: Force load world")
         Message.print(sender, "/nodesadmin runincome${ChatColor.WHITE}: Runs income for all towns")
+        Message.print(sender, "/nodesadmin playersonline${ChatColor.WHITE}: Rebuild online player lists for towns/nations")
         Message.print(sender, "/nodesadmin debug${ChatColor.WHITE}: World object debugger")
         return
     }
@@ -999,16 +1002,23 @@ public class NodesAdminCommand :
         Message.print(sender, "/nodesadmin town captureterritory${ChatColor.WHITE}: Add captured territories to town")
         Message.print(sender, "/nodesadmin town releaseterritory${ChatColor.WHITE}: Release captured territories")
         Message.print(sender, "/nodesadmin town claimsbonus${ChatColor.WHITE}: Set town bonus claims")
+        Message.print(sender, "/nodesadmin town claimspenalty${ChatColor.WHITE}: Set town claims penalty")
         Message.print(sender, "/nodesadmin town claimsannex${ChatColor.WHITE}: Set town annexed claims penalty")
         Message.print(sender, "/nodesadmin town setspawn${ChatColor.WHITE}: Set town's spawn to location")
         Message.print(sender, "/nodesadmin town spawn${ChatColor.WHITE}: Go to town's spawn")
         Message.print(sender, "/nodesadmin town addofficer${ChatColor.WHITE}: Add officer to town")
         Message.print(sender, "/nodesadmin town removeofficer${ChatColor.WHITE}: Remove officer from town")
         Message.print(sender, "/nodesadmin town leader${ChatColor.WHITE}: Set town leader to player")
+        Message.print(sender, "/nodesadmin town removeleader${ChatColor.WHITE}: Remove town's leader")
         Message.print(sender, "/nodesadmin town open${ChatColor.WHITE}: Toggle town is open to join")
         Message.print(sender, "/nodesadmin town income${ChatColor.WHITE}: View a town's income inventory")
+        Message.print(sender, "/nodesadmin town incomeadd${ChatColor.WHITE}: Add held items to a town's income")
+        Message.print(sender, "/nodesadmin town incomeremove${ChatColor.WHITE}: Remove items from a town's income")
+        Message.print(sender, "/nodesadmin town sethome${ChatColor.WHITE}: Set a town's home territory")
+        Message.print(sender, "/nodesadmin town sethomecooldown${ChatColor.WHITE}: Set a town's move home cooldown")
         Message.print(sender, "/nodesadmin town addoutpost${ChatColor.WHITE}: Add an outpost to a town")
         Message.print(sender, "/nodesadmin town removeoutpost${ChatColor.WHITE}: Remove an outpost from a town")
+        Message.print(sender, "/nodesadmin town defaulttownspawns${ChatColor.WHITE}: Reset town spawn to default position")
         Message.print(sender, "Run a command with no args to see usage.")
     }
 
@@ -1372,7 +1382,7 @@ public class NodesAdminCommand :
 
     /**
      * @command /nodesadmin town claimsannex [town] [#]
-     * Set town bonus claims.
+     * Set town annexed claims penalty.
      */
     private fun setClaimsAnnexed(sender: CommandSender, args: Array<String>) {
         if (args.size < 3) {
@@ -1763,7 +1773,7 @@ public class NodesAdminCommand :
     }
 
     /**
-     * @command /nodesadmin town setHomeCooldown [town] [int]
+     * @command /nodesadmin town sethomecooldown [town] [int]
      * Set a town's move home cooldown
      */
     private fun setTownMoveHomeCooldown(sender: CommandSender, args: Array<String>) {
