@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- `/nation help` now lists the `capital`, `accept`, `deny`, `info`, `online`, `rename`, and `spawn` sub-commands, and its `invite` line says it invites a town rather than a nation. `/town help` now lists `leader`, `accept`, `deny`, and `income`. All were routed but missing from the in-game help. `COMMANDS.md` now lists the `perms` alias of `/town permissions`.
 - Documented the `/nodesadmin` sub-commands in `COMMANDS.md`, including the `town` and `nation` sub-command tables. The entry previously listed only the command's permission and alias.
 - Corrected the `/nodesadmin allyremove`, `truce`, and `truceremove` usage messages, which had been copied from `ally`, and the `/nodesadmin town sethomecooldown` usage message, which had been copied from `sethome`.
 - `/nodesadmin help` now lists the `resident`, `treaty`, and `playersonline` sub-commands, and `/nodesadmin town` help now lists `claimspenalty`, `removeleader`, `incomeadd`, `incomeremove`, `sethome`, `sethomecooldown`, and `defaulttownspawns`. All were routed but missing from the in-game help. Also corrected the KDoc headers of the `claimsannex` and `sethomecooldown` handlers.
