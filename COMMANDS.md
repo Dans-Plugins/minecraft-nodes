@@ -73,7 +73,7 @@ Sub-commands (aliases in parentheses):
 | `rename <name>` | Rename your town |
 | `map` | View the world map |
 | `minimap [3\|4\|5]` | Toggle the sidebar minimap |
-| `permissions <type> <group> <allow\|deny>` | Set town protection permissions |
+| `permissions <type> <group> <allow\|deny>` (`perms`) | Set town protection permissions |
 | `protect` | Protect town chests |
 | `trust <player>` / `untrust <player>` | Mark or unmark a player as trusted |
 | `capital` | Move the town's home territory to your location |

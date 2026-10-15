@@ -148,9 +148,16 @@ public class NationCommand :
         Message.print(sender, "/nation create${ChatColor.WHITE}: Create nation with name at location")
         Message.print(sender, "/nation delete${ChatColor.WHITE}: Delete your nation")
         Message.print(sender, "/nation leave${ChatColor.WHITE}: Leave your nation")
-        Message.print(sender, "/nation invite${ChatColor.WHITE}: Invite a nation to your nation")
+        Message.print(sender, "/nation capital${ChatColor.WHITE}: Make another town the nation capital")
+        Message.print(sender, "/nation invite${ChatColor.WHITE}: Invite a town to your nation")
+        Message.print(sender, "/nation accept${ChatColor.WHITE}: Accept a nation invitation")
+        Message.print(sender, "/nation deny${ChatColor.WHITE}: Decline a nation invitation")
         Message.print(sender, "/nation list${ChatColor.WHITE}: List all nations")
+        Message.print(sender, "/nation info${ChatColor.WHITE}: View nation details")
+        Message.print(sender, "/nation online${ChatColor.WHITE}: View nation's online players")
         Message.print(sender, "/nation color${ChatColor.WHITE}: Set nation color on map")
+        Message.print(sender, "/nation rename${ChatColor.WHITE}: Rename nation")
+        Message.print(sender, "/nation spawn${ChatColor.WHITE}: Teleport to a town in your nation")
         return
     }
 
