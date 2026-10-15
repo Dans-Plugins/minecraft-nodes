@@ -341,6 +341,7 @@ public class TownCommand :
         Message.print(sender, "/town delete${ChatColor.WHITE}: Delete your town")
         Message.print(sender, "/town promote${ChatColor.WHITE}: Give officer rank to resident")
         Message.print(sender, "/town demote${ChatColor.WHITE}: Remove officer rank from resident")
+        Message.print(sender, "/town officer${ChatColor.WHITE}: Toggle officer rank for resident")
         Message.print(sender, "/town leader${ChatColor.WHITE}: Transfer town leadership")
         Message.print(sender, "/town apply${ChatColor.WHITE}: Apply to join a town")
         Message.print(sender, "/town invite${ChatColor.WHITE}: Invite a player to your town")
