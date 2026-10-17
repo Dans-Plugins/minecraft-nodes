@@ -12,10 +12,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Removed
 
+- Removed the `lint` and `lint-fmt` scripts from `dynmap/package.json`. Both pointed at an `eslint/` config directory that is not in the repository, so they always failed.
 - Deleted `.github/workflows/build.yml`, which triggered only on the nonexistent `main` and `develop` branches and duplicated the `nodes/` build already performed by `.github/workflows/main.yml`.
 
 ### Fixed
 
+- `npm run build` in `dynmap/` now runs `npm run wasm` and `npm run build-js` one after the other instead of concurrently, so webpack no longer starts before the `wasm/` bindings it imports have been generated.
 - `/nation help` now lists the `capital`, `accept`, `deny`, `info`, `online`, `rename`, and `spawn` sub-commands, and its `invite` line says it invites a town rather than a nation. `/town help` now lists `officer`, `leader`, `accept`, `deny`, and `income`. All were routed but missing from the in-game help. `COMMANDS.md` now lists the `perms` alias of `/town permissions`.
 - Documented the `/nodesadmin` sub-commands in `COMMANDS.md`, including the `town` and `nation` sub-command tables. The entry previously listed only the command's permission and alias.
 - Corrected the `/nodesadmin allyremove`, `truce`, and `truceremove` usage messages, which had been copied from `ally`, and the `/nodesadmin town sethomecooldown` usage message, which had been copied from `sethome`.

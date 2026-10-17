@@ -60,9 +60,8 @@ build release files.
 1. Compiles the rust/wasm (`npm run wasm`).
 2. Runs webpack on the js/react (`npm run build-js`).
 
-The two steps are joined with a single `&`, so they start at the same
-time rather than one after the other. Run `npm run wasm` first so the
-webpack step finds the generated `wasm/` bindings.
+The webpack step starts only after the wasm step succeeds, so it always
+finds the generated `wasm/` bindings.
 
 Run in this `dynmap/` directory. This generates files in `dynmap/build/`.
 Copy all generated files into the `plugins/dynmap/web` folder of the
