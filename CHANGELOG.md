@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- Documented the `/globalchat` `mute` and `unmute` sub-commands (and their `leave` and `join` aliases) in `COMMANDS.md`, along with how the chat commands toggle back to global chat and drop messages sent to a town, nation, or ally channel the player does not belong to. Corrected the `PlayerCommand` KDoc header, which had been copied from `/truce`, and the `/player` console usage message.
 - `npm run build` in `dynmap/` now runs `npm run wasm` and `npm run build-js` one after the other instead of concurrently, so webpack no longer starts before the `wasm/` bindings it imports have been generated.
 - `/nation help` now lists the `capital`, `accept`, `deny`, `info`, `online`, `rename`, and `spawn` sub-commands, and its `invite` line says it invites a town rather than a nation. `/town help` now lists `officer`, `leader`, `accept`, `deny`, and `income`. All were routed but missing from the in-game help. `COMMANDS.md` now lists the `perms` alias of `/town permissions`.
 - Documented the `/nodesadmin` sub-commands in `COMMANDS.md`, including the `town` and `nation` sub-command tables. The entry previously listed only the command's permission and alias.

@@ -152,27 +152,39 @@ The diplomacy commands take a town or nation name directly rather than a sub-com
 
 ## Chat Commands
 
-### /globalchat
+The chat commands work in game only. Each one toggles your chat channel: running `/townchat`, `/nationchat`, or `/allychat` while already in that channel switches you back to global chat. In the town, nation, or ally channel, a message sent while you have no town (or, for the nation channel, no nation) is dropped without being delivered.
 
-**Description:** Switch your chat to global (all players).  
+### /globalchat \[subcommand\]
+
+**Description:** Switch your chat to global (all players). With a sub-command, mute or unmute global chat for yourself instead.  
 **Aliases:** `/gc`  
-**Permission:** `nodes.command.chat.global`
+**Permission:** `nodes.command.chat.global`  
+**Usage:** `/globalchat` or `/globalchat <mute|unmute>`
+
+Sub-commands:
+
+| Sub-command | Description |
+|-------------|-------------|
+| `mute` (`leave`) | Stop receiving global chat messages. Town, nation, and ally messages are still received |
+| `unmute` (`join`) | Receive global chat messages again |
+
+The mute is not saved: it is cleared when you log out.
 
 ### /townchat
 
-**Description:** Switch your chat to town-only.  
+**Description:** Switch your chat to your town's online members.  
 **Aliases:** `/tc`  
 **Permission:** `nodes.command.chat.town`
 
 ### /nationchat
 
-**Description:** Switch your chat to nation-only.  
+**Description:** Switch your chat to the online members of your nation.  
 **Aliases:** `/nc`  
 **Permission:** `nodes.command.chat.nation`
 
 ### /allychat
 
-**Description:** Switch your chat to ally-only.  
+**Description:** Switch your chat to your town's online members and the online members of every town allied with it.  
 **Aliases:** `/ac`  
 **Permission:** `nodes.command.chat.ally`
 
