@@ -33,7 +33,7 @@ public class PlayerCommand :
                     resident.printInfo(sender)
                 }
             } else {
-                Message.error(sender, "Usage: \"/player [name]\" to print player info")
+                Message.error(sender, "Usage: \"/player <name>\" to print player info")
             }
         }
         // parse player name
