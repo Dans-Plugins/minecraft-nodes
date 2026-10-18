@@ -50,7 +50,7 @@ If `plugins/nodes/world.json` is missing or cannot be parsed and `disableWorldWh
 
 | Command | Description |
 |---------|-------------|
-| `/globalchat` or `/gc` | Switch to global chat |
+| `/globalchat` or `/gc` | Switch to global chat (`/gc mute` and `/gc unmute` stop and resume receiving it) |
 | `/townchat` or `/tc` | Switch to town-only chat |
 | `/nationchat` or `/nc` | Switch to nation-only chat |
 | `/allychat` or `/ac` | Switch to ally-only chat |
