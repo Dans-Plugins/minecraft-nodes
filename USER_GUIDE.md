@@ -57,7 +57,7 @@ If `plugins/nodes/world.json` is missing or cannot be parsed and `disableWorldWh
 
 ### Port Warps
 
-Ports allow quick travel between coastal territories. Run `/port list` to see available ports, then `/port warp <name>` to warp.
+Ports allow quick travel between ports in the same port group. Run `/port list` to see available ports, then, standing in a port's chunk in a boat, run `/port warp <name>` to warp. See `COMMANDS.md` for the full set of warp conditions.
 
 ## Permissions
 

@@ -11,16 +11,18 @@ All commands provided by the Nodes plugin are listed below. Use `/command help` 
 **Permission:** `nodes.command.nodes`  
 **Usage:** `/nodes help`
 
-Sub-commands:
+Sub-commands (aliases in parentheses):
 
 | Sub-command | Description |
 |-------------|-------------|
-| `resource [name]` | Get a resource node's properties |
-| `territory [id]` | Get territory info |
-| `town [name]` | Get town info |
-| `nation [name]` | Get nation info |
-| `player [name]` | Get player info |
-| `war` | Current war status |
+| `resource [name]` | With a name, print a resource node's properties; without one, list all resource nodes |
+| `territory [id]` | With an ID, print that territory's info; without one, print the territory you are standing in (from the console, print the territory count) |
+| `town [name]` (`towns`) | With a name, print that town's info; without one, list all towns with their player and territory counts |
+| `nation [name]` (`nations`) | With a name, print that nation's info; without one, list all nations |
+| `player <name>` (`players`) | Print a player's info. The name is required |
+| `war` | Print the current war status. War is toggled with `/nodesadmin war`, not here |
+
+Resource node, town, and nation names are matched exactly as written, including case.
 
 ### /player \[name\]
 
@@ -194,17 +196,28 @@ The mute is not saved: it is cleared when you log out.
 
 ### /port \<subcommand\>
 
-**Description:** Use port warps to travel between coastal territories.  
+**Description:** Use port warps to travel between ports. Ports and port groups are managed with `/nodesadmin port` and `/nodesadmin portgroup` and saved to `plugins/nodes/ports.json`.  
 **Permission:** `nodes.command.port`  
 **Usage:** `/port help`
+
+Running `/port` with no sub-command prints the help.
 
 Sub-commands:
 
 | Sub-command | Description |
 |-------------|-------------|
-| `list` | List all available ports |
-| `info <name>` | Print info about a port |
-| `warp <name>` | Warp to a port |
+| `list` | List every port under each port group it belongs to, marked `(public)` or `(owned)` |
+| `info <name>` | Print a port's location, groups, and either `Public` or its owner and access |
+| `warp <name>` | Warp to a port (in game only) |
+
+The port name you type is lowercased before it is looked up. `/nodesadmin port create` stores names in lowercase, so those ports match however you type them. A warp only starts when all of the following hold:
+
+- You are standing in the same chunk as a port, and it is not the destination.
+- The two ports share at least one port group.
+- The destination is public, or has no owner, or is owned by your town, your nation, or an ally. A non-public port's owner is the town occupying its chunk, if there is one, and otherwise the town that owns its territory.
+- You are in a boat, unless `allowPortWarpWithoutBoat` is enabled in `config.yml`.
+
+The warp completes after `portWarpTime` seconds and is cancelled if you move to another block. You arrive at the destination port's x and z coordinates, at the `seaLevel` height.
 
 ---
 

@@ -574,7 +574,7 @@ globalResources:
 
 **Type:** float  
 **Default:** `62.0`  
-**Description:** Y-level used as the sea level for port warp eligibility checks.
+**Description:** Y-level that players and boats are teleported to when a port warp completes. It is not used to decide whether a warp can start.
 
 ---
 
