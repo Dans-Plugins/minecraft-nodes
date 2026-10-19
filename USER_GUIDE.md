@@ -57,7 +57,7 @@ If `plugins/nodes/world.json` is missing or cannot be parsed and `disableWorldWh
 
 ### Port Warps
 
-Ports allow quick travel between ports in the same port group. Run `/port list` to see available ports, then, standing in a port's chunk in a boat, run `/port warp <name>` to warp. See `COMMANDS.md` for the full set of warp conditions.
+Ports allow quick travel between ports in the same port group. Run `/port list` to see available ports, then, standing in a port's chunk in a boat (unless the server enables `allowPortWarpWithoutBoat`), run `/port warp <name>` to warp. See `COMMANDS.md` for the full set of warp conditions.
 
 ## Permissions
 
