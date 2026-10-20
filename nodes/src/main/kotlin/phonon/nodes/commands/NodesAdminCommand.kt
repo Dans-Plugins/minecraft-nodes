@@ -691,7 +691,7 @@ public class NodesAdminCommand :
      * Creates a port from name and a set of coordinates.
      */
     private fun createPort(sender: CommandSender, args: Array<String>) {
-        if (args.size < 4) {
+        if (args.size < 5) {
             Message.error(sender, "Usage: /nodesadmin port create [name] [x] [z]")
             Message.error(sender, "Example: /nodesadmin port create panama 100 200")
             return

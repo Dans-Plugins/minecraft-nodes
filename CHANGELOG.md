@@ -17,6 +17,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- `/port info` now prints `Invalid port "<name>"` for a name that matches no port instead of printing nothing.
+- Port names loaded from `ports.json` are now lowercased, so a port whose name was written there with capital letters can be found by `/port info` and `/port warp`.
+- `/nodesadmin port create` with the z coordinate left off now prints its usage message instead of throwing an `ArrayIndexOutOfBoundsException`.
 - Corrected the `/nodes` sub-command table in `COMMANDS.md`, which did not say that `resource`, `town`, and `nation` list everything when run without a name, that `player` requires a name, or that `towns`, `nations`, and `players` are aliases. Documented the `/port` warp conditions (same chunk as a port, shared port group, owner access, boat requirement) and how port names are matched. Corrected the `seaLevel` entry in `CONFIG.md`, which described it as a warp eligibility check when it is the Y-level a warp arrives at, and the `USER_GUIDE.md` port section, which tied ports to coastal territories.
 - Documented the `/globalchat` `mute` and `unmute` sub-commands (and their `leave` and `join` aliases) in `COMMANDS.md`, along with how the chat commands toggle back to global chat and drop messages sent to a town, nation, or ally channel the player does not belong to. Corrected the `PlayerCommand` KDoc header, which had been copied from `/truce`, and the `/player` console usage message.
 - `npm run build` in `dynmap/` now runs `npm run wasm` and `npm run build-js` one after the other instead of concurrently, so webpack no longer starts before the `wasm/` bindings it imports have been generated.

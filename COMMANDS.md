@@ -210,7 +210,7 @@ Sub-commands:
 | `info <name>` | Print a port's location, groups, and either `Public` or its owner and access |
 | `warp <name>` | Warp to a port (in game only) |
 
-The port name you type is lowercased before it is looked up. `/nodesadmin port create` stores names in lowercase, so those ports match however you type them. A warp only starts when all of the following hold:
+Port names are case-insensitive. The name you type is lowercased before it is looked up, and port names are stored in lowercase, both when created with `/nodesadmin port create` and when loaded from `ports.json`. `info` and `warp` print an error for a name that matches no port. A warp only starts when all of the following hold:
 
 - You are standing in the same chunk as a port, and it is not the destination.
 - The two ports share at least one port group.

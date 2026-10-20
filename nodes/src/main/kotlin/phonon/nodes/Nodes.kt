@@ -3401,10 +3401,12 @@ public object Nodes {
         groups: HashSet<PortGroup>,
         isPublic: Boolean,
     ): Port? {
-        val port = Port(name, locX, locZ, groups, isPublic)
+        // lowercase so names typed into ports.json match command lookups
+        val portName = name.lowercase()
+        val port = Port(portName, locX, locZ, groups, isPublic)
 
         // save new port
-        ports.put(name, port)
+        ports.put(portName, port)
 
         // for each port, map the chunk its in to it
         val chunk = listOf(Math.floorDiv(locX, 16), Math.floorDiv(locZ, 16))
