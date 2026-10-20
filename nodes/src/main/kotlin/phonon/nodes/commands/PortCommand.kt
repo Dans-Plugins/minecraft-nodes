@@ -156,6 +156,8 @@ public class PortCommand :
                 Message.print(sender, "${ChatColor.AQUA}- Owner: $ownerName")
                 Message.print(sender, "${ChatColor.AQUA}- Access: Allies only")
             }
+        } else {
+            Message.error(sender, "Invalid port \"${args[1]}\"")
         }
     }
 
