@@ -118,35 +118,37 @@ There is no `kick` sub-command; a town leaves a nation with `/nation leave`.
 
 ## Diplomacy Commands
 
-The diplomacy commands take a town or nation name directly rather than a sub-command. Running any of them with no arguments prints its help text. Only a town's leader and officers may use them, and when the town belongs to a nation only the capital town may act.
+`/ally`, `/unally`, `/war`, and `/peace` take a town or nation name directly rather than a sub-command, and print their help text when run with no arguments (`/war` also prints the current war status first). With a name, they work in game only, and only a town's leader and officers may use them; when the town belongs to a nation, only the capital town may act. A name is looked up as a nation first and then as a town, matched exactly as written, including case. Naming a town that belongs to a nation acts on that whole nation.
+
+A truce blocks war between two sides for [`trucePeriod`](CONFIG.md#truceperiod) milliseconds. One starts when a peace treaty is signed, when an alliance is broken with `/unally`, or when an admin runs `/nodesadmin truce`.
 
 ### /ally \<town|nation\>
 
-**Description:** Offer an alliance to another town or nation, or accept one that was offered to you.  
+**Description:** Offer an alliance to another town or nation, or accept one that was offered to you. An alliance cannot be offered to a side you are at war with.  
 **Permission:** `nodes.command.ally`  
 **Usage:** `/ally <town>` or `/ally <nation>`
 
 ### /unally \<town|nation\>
 
-**Description:** Break an alliance with another town or nation.  
+**Description:** Break an alliance with another town or nation. Breaking an alliance starts a truce between the two sides.  
 **Permission:** `nodes.command.unally`  
 **Usage:** `/unally <town>` or `/unally <nation>`
 
 ### /war \<town|nation\>
 
-**Description:** Declare war on another town or nation. Declaring war on a town that belongs to a nation declares war on the whole nation. With no arguments, prints the current war status.  
+**Description:** Declare war on another town or nation. War cannot be declared on an ally or on a side you are in a truce with.  
 **Permission:** `nodes.command.war`  
 **Usage:** `/war <town>` or `/war <nation>`
 
 ### /peace \<town|nation\>
 
-**Description:** Open a peace treaty GUI with another town or nation. Both sides run the command against each other and negotiate and confirm the terms in the GUI.  
+**Description:** Open a peace treaty GUI with another town or nation. Both sides run the command against each other and negotiate and confirm the terms in the GUI. Signing the treaty ends the war between the two sides and starts a truce.  
 **Permission:** `nodes.command.peace`  
 **Usage:** `/peace <town>` or `/peace <nation>`
 
 ### /truce \[town\]
 
-**Description:** View active truces and the time remaining on each, for your own town or a named town.  
+**Description:** View active truces and the time remaining on each. With no argument, lists your own town's truces; with a town name (matched exactly as written, including case), lists that town's truces. Unlike the other diplomacy commands, it is not limited to town leaders and officers, and it works from the console when a town name is given.  
 **Permission:** `nodes.command.truce`  
 **Usage:** `/truce` or `/truce <town>`
 

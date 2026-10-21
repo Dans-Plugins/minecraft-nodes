@@ -564,7 +564,7 @@ globalResources:
 
 **Type:** integer (milliseconds)  
 **Default:** `259200000` (72 hours)  
-**Description:** How long a truce lasts after a war ends.
+**Description:** How long a truce lasts. A truce starts when a peace treaty is signed, when an alliance is broken with `/unally`, or when an admin runs `/nodesadmin truce`, and war cannot be declared between the two sides until it expires.
 
 ---
 
