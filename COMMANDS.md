@@ -118,7 +118,7 @@ There is no `kick` sub-command; a town leaves a nation with `/nation leave`.
 
 ## Diplomacy Commands
 
-`/ally`, `/unally`, `/war`, and `/peace` take a town or nation name directly rather than a sub-command, and print their help text when run with no arguments (`/war` also prints the current war status first). They work in game only, and only a town's leader and officers may use them; when the town belongs to a nation, only the capital town may act. A name is looked up as a nation first and then as a town, matched exactly as written, including case. Naming a town that belongs to a nation acts on that whole nation.
+`/ally`, `/unally`, `/war`, and `/peace` take a town or nation name directly rather than a sub-command, and print their help text when run with no arguments (`/war` also prints the current war status first). With a name, they work in game only, and only a town's leader and officers may use them; when the town belongs to a nation, only the capital town may act. A name is looked up as a nation first and then as a town, matched exactly as written, including case. Naming a town that belongs to a nation acts on that whole nation.
 
 A truce blocks war between two sides for [`trucePeriod`](CONFIG.md#truceperiod) milliseconds. One starts when a peace treaty is signed, when an alliance is broken with `/unally`, or when an admin runs `/nodesadmin truce`.
 
