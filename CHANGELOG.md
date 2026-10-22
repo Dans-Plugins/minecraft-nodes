@@ -17,6 +17,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- `/ally`, `/unally`, and `/peace` now print `You do not belong to a town` when run by a player without a town, matching `/war`, instead of doing nothing. `/ally` and `/unally` aimed at your own town now say `You cannot make an alliance with yourself.` and `You cannot break an alliance with yourself.` instead of the peace-treaty message copied from `/peace`.
 - Corrected the diplomacy section of `COMMANDS.md`, which said every diplomacy command prints its help with no arguments and is limited to town leaders and officers. `/truce` is not limited to leaders and officers, lists your own town's truces when run with no argument, and works from the console with a town name. Documented that `/unally` and a signed peace treaty start a truce, that war cannot be declared on an ally or a side in a truce, that an alliance cannot be offered to an enemy, and how target names are matched. Corrected the `trucePeriod` entry in `CONFIG.md`, which said a truce only follows the end of a war.
 - `/port info` now prints `Invalid port "<name>"` for a name that matches no port instead of printing nothing.
 - Port names loaded from `ports.json` are now lowercased, so a port whose name was written there with capital letters can be found by `/port info` and `/port warp`.
