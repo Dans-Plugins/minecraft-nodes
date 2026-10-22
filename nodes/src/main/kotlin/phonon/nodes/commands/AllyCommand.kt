@@ -54,6 +54,7 @@ public class AllyCommand :
 
         val town = resident.town
         if (town == null) {
+            Message.error(player, "You do not belong to a town")
             return true
         }
 
@@ -119,7 +120,7 @@ public class AllyCommand :
     // offer alliance, other side must offer alliance to accept
     private fun offerAlliance(player: Player, town: Town, other: Town, townNation: Nation?, otherNation: Nation?) {
         if (town === other) {
-            Message.error(player, "You cannot make a peace treaty with yourself.")
+            Message.error(player, "You cannot make an alliance with yourself.")
             return
         }
 

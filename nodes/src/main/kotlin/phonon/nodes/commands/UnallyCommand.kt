@@ -50,6 +50,7 @@ public class UnallyCommand :
 
         val town = resident.town
         if (town == null) {
+            Message.error(player, "You do not belong to a town")
             return true
         }
 
@@ -115,7 +116,7 @@ public class UnallyCommand :
     // break alliance with other side
     private fun breakAlliance(player: Player, town: Town, other: Town, townNation: Nation?, otherNation: Nation?) {
         if (town === other) {
-            Message.error(player, "You cannot make a peace treaty with yourself.")
+            Message.error(player, "You cannot break an alliance with yourself.")
             return
         }
 

@@ -50,6 +50,7 @@ public class PeaceCommand :
 
         val town = resident.town
         if (town == null) {
+            Message.error(player, "You do not belong to a town")
             return true
         }
 
