@@ -39,6 +39,7 @@ public class PeaceCommand :
         }
 
         if (!(sender is Player)) {
+            Message.error(sender, "Only players in game can use")
             return true
         }
 

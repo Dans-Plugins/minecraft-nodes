@@ -29,6 +29,7 @@ public class TruceCommand :
         // no args, use sender's town
         if (args.size == 0) {
             if (!(sender is Player)) {
+                Message.error(sender, "Usage from the console: /truce <town>")
                 return true
             }
 

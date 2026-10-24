@@ -54,6 +54,7 @@ public class GlobalChatCommand :
 
     override fun onCommand(sender: CommandSender, cmd: Command, commandLabel: String, args: Array<String>): Boolean {
         if (!(sender is Player)) {
+            Message.error(sender, "Only players in game can use")
             return true
         }
 
@@ -111,6 +112,7 @@ public class TownChatCommand :
 
     override fun onCommand(sender: CommandSender, cmd: Command, commandLabel: String, args: Array<String>): Boolean {
         if (!(sender is Player)) {
+            Message.error(sender, "Only players in game can use")
             return true
         }
 
@@ -153,6 +155,7 @@ public class NationChatCommand :
 
     override fun onCommand(sender: CommandSender, cmd: Command, commandLabel: String, args: Array<String>): Boolean {
         if (!(sender is Player)) {
+            Message.error(sender, "Only players in game can use")
             return true
         }
 
@@ -195,6 +198,7 @@ public class AllyChatCommand :
 
     override fun onCommand(sender: CommandSender, cmd: Command, commandLabel: String, args: Array<String>): Boolean {
         if (!(sender is Player)) {
+            Message.error(sender, "Only players in game can use")
             return true
         }
 
