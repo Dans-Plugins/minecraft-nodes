@@ -151,7 +151,7 @@ disableWorldWhenLoadFails: true
 
 **Type:** integer (seconds)  
 **Default:** `10`  
-**Description:** Warm-up time in seconds before a player is teleported to their town home.
+**Description:** Warm-up time in seconds before a `/town spawn` teleport (to the town spawn or an outpost) or a `/nation spawn` teleport happens. Moving to another block during the warm-up cancels the teleport.
 
 ---
 

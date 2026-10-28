@@ -26,14 +26,14 @@ Resource node, town, and nation names are matched exactly as written, including 
 
 ### /player \[name\]
 
-**Description:** View info about yourself or another player (town, nation, claim power).  
+**Description:** View info about yourself or another player (claim power, town, nation). The name is matched against online players first, where the start of a name is enough, and then against the full name of every known player. Both matches ignore case. From the console, the name is required.  
 **Aliases:** `/p`  
 **Permission:** `nodes.command.player`  
 **Usage:** `/player` or `/player <name>`
 
 ### /territory \[id\]
 
-**Description:** View information about the territory you are standing in, or by ID.  
+**Description:** View information about the territory you are standing in, or the territory with a numeric ID, including its resources. From the console, run without an ID, it prints the territory count instead.  
 **Permission:** `nodes.command.territory`  
 **Usage:** `/territory` or `/territory <id>`
 
@@ -94,23 +94,27 @@ Sub-commands (aliases in parentheses):
 **Permission:** `nodes.command.nation`  
 **Usage:** `/nation help`
 
+Running `/nation` with no sub-command prints your nation's info, if you have one, and a pointer to `/nation help`. The nation leader is the leader of the nation's capital town.
+
 Sub-commands (aliases in parentheses):
 
 | Sub-command | Description |
 |-------------|-------------|
-| `create <name>` (`new`) | Create a new nation with your town as its capital |
-| `delete` (`disband`) | Delete your nation |
-| `leave` | Remove your town from its nation (town leader only) |
+| `create <name>` (`new`) | Create a new nation with your town as its capital (town leader only; not during war) |
+| `delete` (`disband`) | Delete your nation (nation leader only; not during war) |
+| `leave` | Remove your town from its nation (town leader only). The capital town cannot leave; delete the nation instead. Not allowed during war unless `canLeaveNationDuringWar` is enabled |
 | `capital <town>` | Make another town in your nation the capital (nation leader only) |
-| `invite <town>` | Invite a town to your nation (capital town leader only) |
-| `accept` | Accept a pending nation invitation for your town |
+| `invite <town>` | Invite a town that has no nation (nation leader only). The invited town's leader must be online, and the invitation expires after 60 seconds |
+| `accept` | Accept a pending nation invitation. Invitations go to the invited town's leader, so only that player can accept |
 | `deny` (`reject`) | Decline a pending nation invitation |
-| `list` | List all nations |
-| `info [name]` | Show nation info |
-| `online [name]` | Show a nation's online players |
-| `color <r> <g> <b>` | Set nation color on the map |
-| `rename <name>` | Rename your nation |
-| `spawn <town>` | Teleport to a town in your nation (if `allowNationTownSpawn` is enabled; may cost items) |
+| `list` | List all nations with their population and towns, largest first |
+| `info [name]` | Show a nation's info; without a name, your own nation's |
+| `online [name]` | Show a nation's online players; without a name, your own nation's |
+| `color <r> <g> <b>` | Set nation color on the map (nation leader only). Each value is clamped to 0–255 |
+| `rename <name>` | Rename your nation (nation leader only) |
+| `spawn <town>` | Teleport to another town's spawn in your nation, if `allowNationTownSpawn` is enabled. Costs the items in `nationTownTeleportCost`, taken when the teleport starts. The teleport happens after `townSpawnTime` seconds and is cancelled, with the items refunded, if you move to another block |
+
+Nation and town names are matched exactly as written, including case. From the console, `help` prints the help, `list` writes the nation list to the server log, and the other sub-commands do nothing.
 
 There is no `kick` sub-command; a town leaves a nation with `/nation leave`.
 
