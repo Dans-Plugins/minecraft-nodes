@@ -62,13 +62,21 @@ public class NationCommand :
                 if (resident != null && resident.nation != null) {
                     resident.nation!!.printInfo(player)
                 }
-                Message.print(player, "Use \"/nation help\" to view commands")
             }
+            Message.print(sender, "Use \"/nation help\" to view commands")
+            return true
+        }
+
+        val subcommand = args[0].lowercase()
+
+        // only help and list work from the console
+        if (player == null && subcommand in subcommands && subcommand != "help" && subcommand != "list") {
+            Message.error(sender, "Only players in game can use")
             return true
         }
 
         // parse subcommand
-        when (args[0].lowercase()) {
+        when (subcommand) {
             "help" -> printHelp(sender)
             "create" -> createNation(player, args)
             "new" -> createNation(player, args)
@@ -80,14 +88,14 @@ public class NationCommand :
             "accept" -> accept(player)
             "deny" -> deny(player)
             "reject" -> deny(player)
-            "list" -> listNations(player)
+            "list" -> listNations(sender)
             "color" -> setColor(player, args)
             "rename" -> renameNation(player, args)
             "online" -> getOnline(player, args)
             "info" -> getInfo(player, args)
             "spawn" -> goToNationTownSpawn(player, args)
             else -> {
-                Message.error(player, "Invalid command, use /nation help")
+                Message.error(sender, "Invalid command, use /nation help")
             }
         }
 
@@ -450,13 +458,13 @@ public class NationCommand :
             return
         }
 
-        if (resident.town != resident.invitingTown) {
-            Message.error(player, "Invite invalid")
+        if (resident.invitingNation == null) {
+            Message.error(player, "You have not been invited to any nation")
             return
         }
 
-        if (resident.invitingNation == null) {
-            Message.error(player, "You have not been invited to any nation")
+        if (resident.town != resident.invitingTown) {
+            Message.error(player, "Invite invalid")
             return
         }
 
@@ -498,8 +506,8 @@ public class NationCommand :
      * @command /nation list
      * View list of all established nations and their towns
      */
-    private fun listNations(player: Player?) {
-        Message.print(player, "${ChatColor.BOLD}Nation - Population - Towns")
+    private fun listNations(sender: CommandSender) {
+        Message.print(sender, "${ChatColor.BOLD}Nation - Population - Towns")
         val nationsList = ArrayList(Nodes.nations.values)
         nationsList.sortByDescending { it.residents.size }
         for (n in nationsList) {
@@ -513,7 +521,7 @@ public class NationCommand :
                     towns += ", "
                 }
             }
-            Message.print(player, "${n.name} ${ChatColor.WHITE}- ${n.residents.size} - $towns")
+            Message.print(sender, "${n.name} ${ChatColor.WHITE}- ${n.residents.size} - $towns")
         }
     }
 
@@ -539,6 +547,7 @@ public class NationCommand :
 
         val nation = resident.nation
         if (nation == null) {
+            Message.error(player, "You do not belong to a nation")
             return
         }
 

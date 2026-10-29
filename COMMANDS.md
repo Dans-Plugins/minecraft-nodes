@@ -114,7 +114,7 @@ Sub-commands (aliases in parentheses):
 | `rename <name>` | Rename your nation (nation leader only) |
 | `spawn <town>` | Teleport to another town's spawn in your nation, if `allowNationTownSpawn` is enabled. Costs the items in `nationTownTeleportCost`, taken when the teleport starts. The teleport happens after `townSpawnTime` seconds and is cancelled, with the items refunded, if you move to another block |
 
-Nation and town names are matched exactly as written, including case. From the console, `help` prints the help, `list` writes the nation list to the server log, and `/nation` alone and the other sub-commands do nothing.
+Nation and town names are matched exactly as written, including case. From the console, `help` prints the help, `list` prints the nation list, `/nation` alone prints the pointer to `/nation help`, and the other sub-commands print `Only players in game can use`.
 
 There is no `kick` sub-command; a town leaves a nation with `/nation leave`.
 
