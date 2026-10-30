@@ -162,13 +162,21 @@ public class TownCommand :
                 if (resident != null && resident.town != null) {
                     resident.town!!.printInfo(player)
                 }
-                Message.print(player, "Use \"/town help\" to view commands")
             }
+            Message.print(sender, "Use \"/town help\" to view commands")
+            return true
+        }
+
+        val subcommand = args[0].lowercase()
+
+        // only help, list, and outpost (which prints its help) work from the console
+        if (player == null && (subcommand in SUBCOMMANDS || subcommand == "perms") && subcommand != "help" && subcommand != "list" && subcommand != "outpost") {
+            Message.error(sender, "Only players in game can use")
             return true
         }
 
         // parse subcommand
-        when (args[0].lowercase()) {
+        when (subcommand) {
             "help" -> printHelp(sender)
             "create" -> createTown(player, args)
             "new" -> createTown(player, args)
@@ -188,7 +196,7 @@ public class TownCommand :
             "kick" -> kickFromTown(player, args)
             "spawn" -> goToSpawn(player, args)
             "setspawn" -> setSpawn(player)
-            "list" -> listTowns(player)
+            "list" -> listTowns(sender)
             "info" -> getInfo(player, args)
             "online" -> getOnline(player, args)
             "color" -> setColor(player, args)
@@ -1181,21 +1189,12 @@ public class TownCommand :
      * @command /town list
      * View list of all established towns
      */
-    private fun listTowns(player: Player?) {
-        if (player == null) {
-            return
-        }
-
-        val resident = Nodes.getResident(player)
-        if (resident == null) {
-            return
-        }
-
-        Message.print(player, "${ChatColor.BOLD}Town - Population")
+    private fun listTowns(sender: CommandSender) {
+        Message.print(sender, "${ChatColor.BOLD}Town - Population")
         val townsList = ArrayList(Nodes.towns.values)
         townsList.sortByDescending { it.residents.size }
         townsList.forEach { town ->
-            Message.print(player, "${town.name}${ChatColor.WHITE} - ${town.residents.size}")
+            Message.print(sender, "${town.name}${ChatColor.WHITE} - ${town.residents.size}")
         }
     }
 

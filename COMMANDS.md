@@ -83,6 +83,8 @@ Sub-commands (aliases in parentheses):
 | `outpost list` / `outpost setspawn` | Manage town outposts |
 | `fly` | Toggle fly mode inside your town (requires `nodes.command.town.fly`) |
 
+From the console, `help` prints the help, `list` prints the town list, `outpost` prints the outpost help, `/town` alone prints the pointer to `/town help`, and the other sub-commands print `Only players in game can use`.
+
 ---
 
 ## Nation Commands
