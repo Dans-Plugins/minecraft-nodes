@@ -142,7 +142,7 @@ A truce blocks war between two sides for [`trucePeriod`](CONFIG.md#truceperiod) 
 
 ### /war \<town|nation\>
 
-**Description:** Declare war on another town or nation. War cannot be declared on an ally or on a side you are in a truce with.  
+**Description:** Declare war on another town or nation. War cannot be declared on an ally, on a side you are in a truce with, or on your own nation or a town in it.  
 **Permission:** `nodes.command.war`  
 **Usage:** `/war <town>` or `/war <nation>`
 

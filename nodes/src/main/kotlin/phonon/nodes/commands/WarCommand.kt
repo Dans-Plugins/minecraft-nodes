@@ -94,6 +94,10 @@ public class WarCommand :
         // 1. try war on nation
         var enemyNation = Nodes.nations.get(target)
         if (enemyNation !== null) {
+            if (enemyNation === townNation) {
+                Message.error(player, "You cannot declare war on your own nation")
+                return
+            }
             declareWar(player, town, enemyNation.capital, townNation, enemyNation)
             return
         }
@@ -108,6 +112,10 @@ public class WarCommand :
             }
 
             enemyNation = enemyTown.nation
+            if (enemyNation !== null && enemyNation === townNation) {
+                Message.error(player, "You cannot declare war on a town in your own nation")
+                return
+            }
             if (enemyNation !== null) {
                 declareWar(player, town, enemyNation.capital, townNation, enemyNation)
             } else {
