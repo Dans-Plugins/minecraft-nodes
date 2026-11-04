@@ -52,7 +52,7 @@ disableWorldWhenLoadFails: true
 
 **Type:** integer (ticks)  
 **Default:** `1200`  
-**Description:** Interval for the main background task, in ticks. That task checks whether income is due and updates town, resident, and truce cooldowns.
+**Description:** Interval for the main background task, in ticks. That task checks whether income is due, and updates player claim power, town claims penalties, and town, resident, and truce cooldowns.
 
 ---
 
