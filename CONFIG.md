@@ -2,6 +2,19 @@
 
 All configuration options for the Nodes plugin live in `plugins/nodes/config.yml`. Options are listed in the order they appear in the default configuration file.
 
+Each `Default` below is the value in the default `config.yml`. The plugin writes that file only when none exists, so a key deleted from an existing file uses a built-in value instead. The built-in values match the defaults except for these:
+
+| Key | Built-in value |
+|---|---|
+| `cropsMinYHeight`, `breedingMinYHeight` | `10` |
+| `playerClaimsInitial` / `playerClaimsMax` / `playerClaimsIncrease` | `0` / `20` / `1` |
+| `chunkAttackTime` | `200` |
+| `trucePeriod` | `172800000` (48 hours) |
+| `portWarpTime` | 100 seconds |
+| `outpostTeleportCost`, `nationTownTeleportCost`, `globalResources` | Empty |
+
+`/nodesadmin reload config` re-reads the file, but `savePeriod`, `mainPeriodicTick`, `overMaxClaimsReminderPeriod`, and `nametagUpdatePeriod` keep their old timing until `/nodesadmin reload managers` or a server restart.
+
 ---
 
 ## Engine Settings
@@ -31,7 +44,7 @@ disableWorldWhenLoadFails: true
 
 **Type:** integer (milliseconds)  
 **Default:** `3600000` (1 hour)  
-**Description:** How often plugin data is backed up, in milliseconds.
+**Description:** How often plugin data is backed up, in milliseconds. A backup is taken during the first save after this period has passed.
 
 ---
 
@@ -39,7 +52,7 @@ disableWorldWhenLoadFails: true
 
 **Type:** integer (ticks)  
 **Default:** `1200`  
-**Description:** Interval for the main background task, in ticks.
+**Description:** Interval for the main background task, in ticks. That task checks whether income is due, and updates player claim power, town claims penalties, and town, resident, and truce cooldowns.
 
 ---
 
@@ -71,7 +84,7 @@ disableWorldWhenLoadFails: true
 
 **Type:** boolean  
 **Default:** `false`  
-**Description:** When enabled, forces a copy of town data to the Dynmap integration on each save cycle.
+**Description:** Copies the saved world, town, and port data to the Dynmap folder even when the Dynmap plugin is not detected. When Dynmap is detected, the data is copied whatever this is set to.
 
 ---
 
@@ -91,7 +104,7 @@ disableWorldWhenLoadFails: true
 
 **Type:** integer (milliseconds)  
 **Default:** `900000` (15 minutes)  
-**Description:** Time in milliseconds before an idle player is penalised. This reduces claim power progress.
+**Description:** Claim power progress a player loses when kicked for idling, in milliseconds. It is taken off the timer that counts towards [`playerClaimsIncreasePeriod`](#townclaimspenaltydecayperiod--playerclaimsincreaseperiod), which stops at zero. The plugin does not detect idle players or kick them itself. It reacts to a server kick with the reason `You have been idle for too long!`, so the idle time is set on the server, not here.
 
 ---
 
@@ -101,7 +114,7 @@ disableWorldWhenLoadFails: true
 
 **Type:** boolean  
 **Default:** `false`  
-**Description:** Whether players can build, destroy, and interact in areas with no territories defined.
+**Description:** Whether players can build, destroy, and interact in areas with no territories defined. When enabled, this also applies in unclaimed territories, whatever `canInteractInUnclaimed` is set to.
 
 ---
 
@@ -191,7 +204,7 @@ outpostTeleportCost:
 
 **Type:** boolean  
 **Default:** `false`  
-**Description:** Whether members of the same nation can attack each other.
+**Description:** Whether members of the same town or nation can attack each other.
 
 ---
 
@@ -227,7 +240,7 @@ outpostTeleportCost:
 
 **Type:** integer  
 **Default:** `25`  
-**Description:** Claim power granted to a player when they first create a town.
+**Description:** Starting claim power for the leader of a new town. The leader starts with the larger of this and `playerClaimsMax`, minus any penalty from [`initialOverClaimsAmountScale`](#initialoverclaimsamountscale).
 
 ---
 
@@ -235,7 +248,7 @@ outpostTeleportCost:
 
 **Type:** integer  
 **Default:** `2`  
-**Description:** Penalty scale applied when a town's territory cost exceeds its initial claim allowance.
+**Description:** Penalty scale for a new town whose home territory costs more than `townInitialClaims`. The leader loses `initialOverClaimsAmountScale * (territory cost - townInitialClaims)` starting claim power.
 
 ---
 
@@ -251,7 +264,7 @@ outpostTeleportCost:
 
 **Type:** integer  
 **Default:** `-1` (unlimited)  
-**Description:** Maximum total claim power a town can have. Set to `-1` for no limit.
+**Description:** Maximum total claim power a town can have. Set to `-1`, or any value that is not positive, for no limit.
 
 ---
 
@@ -267,7 +280,7 @@ outpostTeleportCost:
 
 **Type:** integer  
 **Default:** `2`  
-**Description:** Amount by which a town's overclaim penalty decreases each decay period.
+**Description:** Amount by which a town's claims penalty decreases each decay period. Unclaiming a territory that was not annexed adds its cost to this penalty, which lowers the town's maximum claim power until it decays.
 
 ---
 
@@ -275,7 +288,7 @@ outpostTeleportCost:
 
 **Type:** integer (milliseconds)  
 **Default:** `3600000` (1 hour)  
-**Description:** Period between town penalty decay ticks and player claim power gain ticks.
+**Description:** Period between town penalty decay ticks and player claim power gain ticks. Players only gain claim power while online.
 
 ---
 
@@ -291,7 +304,7 @@ outpostTeleportCost:
 
 **Type:** float  
 **Default:** `0.5`  
-**Description:** Resource yield rate when a town is over its maximum claims (e.g. `0.5` = 50% chance of receiving a resource).
+**Description:** Share of resources lost while a town is over its maximum claims, so a higher value is a harsher penalty. With `0.5`, income is cut by 50%, and each hidden ore drop, crop harvest, and bred animal has a 50% chance of being lost.
 
 ---
 
@@ -325,7 +338,7 @@ outpostTeleportCost:
 
 **Type:** boolean  
 **Default:** `true`  
-**Description:** Scales income by the ratio of player claim power to total territory claim cost.
+**Description:** Scales income by the town's maximum claim power divided by the claim power it has used, limited to the range set by `incomeScaleMin` and `incomeScaleMax`.
 
 ---
 
@@ -358,7 +371,7 @@ globalResources:
 
 **Type:** boolean  
 **Default:** `false`  
-**Description:** Whether mining, harvesting, and breeding are allowed in unclaimed wilderness territories.
+**Description:** Whether resources work in wilderness. `allowOreInWilderness` gives hidden ore drops in unclaimed territories. `allowCropsInWilderness` lets crops grow, and `allowBreedingInWilderness` lets animals breed, in unclaimed territories and in areas with no territory. Whether a player can break blocks there is set by `canInteractInUnclaimed` and `canInteractInEmpty`.
 
 ---
 
@@ -366,7 +379,7 @@ globalResources:
 
 **Type:** boolean  
 **Default:** `true`  
-**Description:** Whether mining is allowed in captured (occupied) territories.
+**Description:** Whether players get hidden ore drops when mining in a territory their town occupies. Breaking blocks there is not affected by this setting.
 
 ---
 
@@ -374,7 +387,7 @@ globalResources:
 
 **Type:** boolean  
 **Default:** `true`  
-**Description:** Whether mining and harvesting are allowed in other towns belonging to the same nation.
+**Description:** Whether players get hidden ore drops when mining in other towns of their nation. Breaking blocks and harvesting crops there are not affected by this setting.
 
 ---
 
@@ -418,7 +431,7 @@ globalResources:
 
 **Type:** boolean  
 **Default:** `true`  
-**Description:** Restricts explosion block damage according to war state.
+**Description:** Turns on the plugin's explosion rules. While no war is active, explosions are blocked if `onlyAllowExplosionsDuringWar` is enabled. During a war, explosions are blocked in towns that are not on a non-empty `warWhitelist` or that are on `warBlacklist`.
 
 ---
 
@@ -426,7 +439,7 @@ globalResources:
 
 **Type:** boolean  
 **Default:** `true`  
-**Description:** Allows explosion block damage only while a war is active.
+**Description:** Blocks explosions while no war is active. Has no effect unless `restrictExplosions` is enabled.
 
 ---
 
@@ -458,7 +471,7 @@ globalResources:
 
 **Type:** float  
 **Default:** `2.0`  
-**Description:** Multipliers applied to `chunkAttackTime` when attacking from wasteland or attacking the enemy's home territory.
+**Description:** Multipliers applied to `chunkAttackTime`: `chunkAttackFromWastelandMultiplier` when the attacked territory borders wilderness, and `chunkAttackHomeMultiplier` when it is the town's home territory. Both apply to a home territory that borders wilderness.
 
 ---
 
@@ -482,7 +495,7 @@ globalResources:
 
 **Type:** integer  
 **Default:** `6` / `100` / `50`  
-**Description:** Visual beacon displayed above war flags. `flagBeaconSize` must be in `[2, 16]`.
+**Description:** Visual beacon displayed above war flags. `flagBeaconSize` is its size, and values outside `[2, 16]` are limited to that range. The beacon appears `flagBeaconSkyLevel` blocks above the flag, but never below Y-level `flagBeaconMinSkyLevel`.
 
 ---
 
@@ -490,7 +503,7 @@ globalResources:
 
 **Type:** boolean  
 **Default:** `false`  
-**Description:** Whether war permissions (building/destroying) are allowed during skirmish mode.
+**Description:** Stored when `/nodesadmin war skirmish` starts a skirmish and shown in the war status, but nothing else reads it, so changing it has no effect on what players can build or destroy. War permissions apply during a skirmish as they do during a full war.
 
 ---
 
@@ -522,7 +535,7 @@ globalResources:
 
 **Type:** boolean  
 **Default:** `true`  
-**Description:** Restricts territory annexation to war time only.
+**Description:** Read by the plugin but not used, so changing it has no effect. `/town annex` always requires a full war started with `/nodesadmin war enable`.
 
 ---
 
@@ -530,7 +543,7 @@ globalResources:
 
 **Type:** list of town UUIDs  
 **Default:** (none)  
-**Description:** Lists of town UUIDs that are specifically allowed or protected in war/annexation. Commented out by default.
+**Description:** Lists of town UUIDs, commented out by default. While `warWhitelist` is non-empty, only towns on it can be attacked or annexed. Towns on `warBlacklist` cannot be attacked or annexed. Towns on `annexBlacklist` can be attacked and occupied but not annexed.
 
 ---
 
@@ -546,7 +559,7 @@ globalResources:
 
 **Type:** float  
 **Default:** `12.0`  
-**Description:** Multiplier applied to the home teleport warm-up time when the town's home territory is occupied.
+**Description:** Multiplier applied to the `/town spawn` warm-up time, including teleports to an outpost, while a war is active and the town's home territory is occupied.
 
 ---
 
@@ -554,7 +567,7 @@ globalResources:
 
 **Type:** list of town UUIDs  
 **Default:** (none)  
-**Description:** Towns on this list allow building/interaction in their occupied territories even outside war time.
+**Description:** In an occupied territory of a town on this list, the occupying town's permissions also decide who can build and interact there, even outside war time.
 
 ---
 

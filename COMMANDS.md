@@ -79,7 +79,7 @@ Sub-commands (aliases in parentheses):
 | `protect` | Protect town chests |
 | `trust <player>` / `untrust <player>` | Mark or unmark a player as trusted |
 | `capital` | Move the town's home territory to your location |
-| `annex` | Annex the occupied territory you are standing in |
+| `annex` | Annex the territory you are standing in (leader and officers only). Your town must occupy it, a full war must be running (`/nodesadmin war enable`, not `skirmish`), and `annexDisabled` must be off. A town's home territory can only be annexed once it is that town's last territory. `warWhitelist`, `warBlacklist`, and `annexBlacklist` can also refuse it |
 | `outpost list` / `outpost setspawn` | Manage town outposts |
 | `fly` | Toggle fly mode inside your town (requires `nodes.command.town.fly`) |
 
