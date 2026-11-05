@@ -20,9 +20,18 @@ dependencies {
     compileOnly("com.google.code.gson:gson:2.13.2")
 
     paperweight.paperDevBundle("1.21.10-R0.1-SNAPSHOT")
+
+    testImplementation("org.jetbrains.kotlin:kotlin-stdlib")
+    testImplementation(platform("org.junit:junit-bom:5.13.4"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks {
+    test {
+        useJUnitPlatform()
+    }
+
     assemble {
         dependsOn(reobfJar)
     }

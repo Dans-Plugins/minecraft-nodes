@@ -475,6 +475,8 @@ public object Config {
 
         // town settings
         Config.townSpawnTime = config.getInt("townSpawnTime", Config.townSpawnTime)
+        Config.outpostTeleportCost.clear()
+        Config.outpostTeleportCostString = ""
         val outpostTeleportCostSection = config.getConfigurationSection("outpostTeleportCost")
         if (outpostTeleportCostSection !== null) {
             Config.outpostTeleportCost.putAll(parseTeleportCost(outpostTeleportCostSection))
@@ -483,6 +485,8 @@ public object Config {
 
         // nation settings
         Config.allowNationTownSpawn = config.getBoolean("allowNationTownSpawn", Config.allowNationTownSpawn)
+        Config.nationTownTeleportCost.clear()
+        Config.nationTownTeleportCostString = ""
         val nationTeleportCostSection = config.getConfigurationSection("nationTownTeleportCost")
         if (nationTeleportCostSection !== null) {
             Config.nationTownTeleportCost.putAll(parseTeleportCost(nationTeleportCostSection))
@@ -544,7 +548,7 @@ public object Config {
 
         // ports
         Config.seaLevel = config.getDouble("seaLevel", Config.seaLevel)
-        Config.portWarpTime = config.getDouble("portWarpTime", Config.portWarpTime) * 20.0 // time is in seconds, convert to ticks
+        Config.portWarpTime = config.getDouble("portWarpTime", 5.0) * 20.0 // time is in seconds, convert to ticks
         Config.allowPortWarpWithoutBoat = config.getBoolean("allowPortWarpWithoutBoat", Config.allowPortWarpWithoutBoat)
     }
 }

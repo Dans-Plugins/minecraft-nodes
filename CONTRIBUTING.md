@@ -54,11 +54,13 @@ Issues are grouped into [milestones](https://github.com/Dans-Plugins/minecraft-n
 
 ## Testing
 
-There is no automated test suite yet — adding one is tracked in [issue #10](https://github.com/Dans-Plugins/minecraft-nodes/issues/10). Until one exists, every change is verified in two steps.
+Every change is verified in two steps. Automated coverage is still small, so the second step matters for most changes.
 
 ### 1. Build
 
-The build compiles the Kotlin sources and runs `ktlintCheck`, so it catches compilation errors and style violations. It does not exercise any plugin behaviour.
+The build compiles the Kotlin sources, runs the unit tests, and runs `ktlintCheck`.
+
+Unit tests live in `nodes/src/test/kotlin/`, in the same package as the code they test, and run on JUnit 5 without a server. They cover only config loading so far. Add a test for code that can run without a live server, such as config parsing and pure logic. To run only the tests, use `./gradlew test` from `nodes/`.
 
 Linux:
 ```
@@ -74,7 +76,7 @@ cd nodes
 
 ### 2. Manual testing on a server
 
-Because the build verifies no behaviour, anything that changes how the plugin acts in game must be checked by hand. Take the JAR from `nodes/build/libs/` and drop it into a local Paper/Spigot server together with the [Kotlin runtime plugin](https://github.com/d-z4/minecraft-kotlin), then exercise the commands and scenarios your change affects.
+Commands, listeners, and war logic have no unit tests, so anything that changes how the plugin acts in game must be checked by hand. Take the JAR from `nodes/build/libs/` and drop it into a local Paper/Spigot server together with the [Kotlin runtime plugin](https://github.com/d-z4/minecraft-kotlin), then exercise the commands and scenarios your change affects.
 
 Describe what was tested manually in your pull request, so reviewers know which behaviour has been checked and which has not.
 
