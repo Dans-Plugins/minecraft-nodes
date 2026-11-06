@@ -10,7 +10,6 @@ Each `Default` below is the value in the default `config.yml`. The plugin writes
 | `playerClaimsInitial` / `playerClaimsMax` / `playerClaimsIncrease` | `0` / `20` / `1` |
 | `chunkAttackTime` | `200` |
 | `trucePeriod` | `172800000` (48 hours) |
-| `portWarpTime` | 100 seconds |
 | `outpostTeleportCost`, `nationTownTeleportCost`, `globalResources` | Empty |
 
 `/nodesadmin reload config` re-reads the file, but `savePeriod`, `mainPeriodicTick`, `overMaxClaimsReminderPeriod`, and `nametagUpdatePeriod` keep their old timing until `/nodesadmin reload managers` or a server restart.

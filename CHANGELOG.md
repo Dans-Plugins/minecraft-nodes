@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+
+- Added a JUnit 5 test setup for `nodes/`, with first tests for `Config.load`. `./gradlew build` now runs the tests.
+
 ### Changed
 
 - Replaced the archived `actions-rs/toolchain@v1` action with `dtolnay/rust-toolchain@stable`, and bumped `actions/checkout`, `actions/setup-java`, and `actions/setup-node` to `v5` in `.github/workflows/main.yml` and `.github/workflows/release.yml`, clearing the Node.js 20 runtime and `set-output` deprecation warnings.
@@ -17,6 +21,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- `portWarpTime` now falls back to 5 seconds when the key is missing from `config.yml`, instead of 100 seconds, and no longer grows with each `/nodesadmin reload config`.
+- `/nodesadmin reload config` now removes items taken out of `outpostTeleportCost` and `nationTownTeleportCost`. Previously the old cost stayed in place until a server restart.
 - Corrected `CONFIG.md` entries that did not match how the plugin uses each key. `overClaimsMaxPenalty` is the share of resources lost, not the share kept. `afkKickTime` is the claim power progress lost when the server kicks an idle player, not an idle timer. `canOnlyAnnexDuringWar` and `allowDestructionDuringSkirmish` have no effect. `chunkAttackFromWastelandMultiplier` applies to territories that border wilderness. The `allowOreIn*` keys control hidden ore drops rather than whether a block can be mined, and `allowOreInNationTowns` does not cover crops. `allowNationFriendlyFire` also covers members of the same town. `townInitialClaims`, `initialOverClaimsAmountScale`, `townPenaltyDecay`, `incomeScaleByClaimPower`, `restrictExplosions`, `onlyAllowExplosionsDuringWar`, and `occupiedHomeTeleportMultiplier` now describe the code's actual calculations and conditions. `CONFIG.md` now also lists the built-in values used when a key is deleted from `config.yml`, and which timers need `/nodesadmin reload managers`. `COMMANDS.md` now lists the conditions on `/town annex`.
 - `/war` aimed at your own nation, or at another town in it, now prints `You cannot declare war on your own nation` or `You cannot declare war on a town in your own nation` instead of `You cannot declare war on yourself`. The war is still refused.
 - `/town` sub-commands other than `help`, `list`, and `outpost` now print `Only players in game can use` when run from the console, instead of doing nothing or writing their usage text to the server log, and `/town` alone from the console prints the pointer to `/town help`. `/town list` now works from the console.

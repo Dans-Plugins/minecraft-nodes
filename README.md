@@ -51,7 +51,7 @@ Please fill out a bug report [here](https://github.com/Dans-Plugins/minecraft-no
 
 ## Testing
 
-There is no automated test suite yet — adding one is tracked in [issue #10](https://github.com/Dans-Plugins/minecraft-nodes/issues/10). The build is currently the only automated check: it compiles the Kotlin sources and runs `ktlintCheck`.
+Unit tests live in `nodes/src/test/kotlin/` and run on JUnit 5 without a server. They cover only config loading so far. The build compiles the Kotlin sources, runs the tests, and runs `ktlintCheck`.
 
 Linux:
 
@@ -67,7 +67,7 @@ cd nodes
 .\gradlew.bat clean build
 ```
 
-`BUILD SUCCESSFUL` means the plugin compiles and is style-clean. It does not mean any behaviour has been verified. To check behaviour, build the JAR and run it on a local Paper/Spigot server as described in [CONTRIBUTING.md](CONTRIBUTING.md).
+`BUILD SUCCESSFUL` means the plugin compiles, is style-clean, and passes the unit tests. Commands, listeners, and war logic have no tests. To check their behaviour, build the JAR and run it on a local Paper/Spigot server as described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Development
 
