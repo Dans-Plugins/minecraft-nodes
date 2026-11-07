@@ -15,7 +15,6 @@ import org.bukkit.World
 import org.bukkit.block.Block
 import org.bukkit.block.Chest
 import org.bukkit.block.DoubleChest
-import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.bukkit.inventory.DoubleChestInventory
@@ -174,12 +173,13 @@ public object Nodes {
     }
 
     /**
-     * reload config file
+     * reload config file, returns false if the current config was kept
+     * because the file could not be loaded
      */
-    internal fun reloadConfig() {
+    internal fun reloadConfig(): Boolean {
         val plugin = Nodes.plugin
         if (plugin === null) {
-            return
+            return false
         }
 
         val logger = plugin.getLogger()
@@ -191,10 +191,7 @@ public object Nodes {
             plugin.saveDefaultConfig()
         }
 
-        val config = YamlConfiguration.loadConfiguration(configFile)
-        if (config !== null) {
-            Config.load(config)
-        }
+        return Config.loadFile(configFile, logger)
     }
 
     /**

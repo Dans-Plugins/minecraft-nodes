@@ -244,7 +244,7 @@ Sub-commands:
 
 | Sub-command | Description |
 |-------------|-------------|
-| `reload <config\|managers\|resources\|territory>` | Reload the config, restart the manager tasks, reload resource nodes from `world.json`, or reload territories from `world.json` (`territory *` for all, or a list of existing territory ids) |
+| `reload <config\|managers\|resources\|territory>` | Reload the config (a `config.yml` that cannot be read or parsed prints an error and the current config stays in place), restart the manager tasks, reload resource nodes from `world.json`, or reload territories from `world.json` (`territory *` for all, or a list of existing territory ids) |
 | `war [enable\|skirmish\|disable\|whitelist\|blacklist]` | With no argument, print the war state. `enable` starts full war, `skirmish` starts border skirmishes (no annexing, only border territories can be attacked), `disable` ends war, and `whitelist`/`blacklist` list the towns in the configured war whitelist or blacklist |
 | `town <sub-command>` | Manage towns (see below) |
 | `nation <sub-command>` | Manage nations (see below) |

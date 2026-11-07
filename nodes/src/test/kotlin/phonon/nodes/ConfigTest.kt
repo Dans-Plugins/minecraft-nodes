@@ -3,15 +3,22 @@ package phonon.nodes
 import org.bukkit.Material
 import org.bukkit.configuration.file.YamlConfiguration
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.io.TempDir
+import java.io.File
+import java.util.UUID
+import java.util.logging.Logger
 
 /**
  * Config is a global object, so each test starts from a known state by
  * loading an empty config.
  */
 class ConfigTest {
+    private val logger = Logger.getAnonymousLogger()
+
     private fun load(yaml: String) {
         val config = YamlConfiguration()
         config.loadFromString(yaml)
@@ -126,5 +133,47 @@ class ConfigTest {
 
         assertTrue(Config.nationTownTeleportCost.isEmpty())
         assertEquals("", Config.nationTownTeleportCostString)
+    }
+
+    @Test
+    fun `loadFile applies a valid file`(@TempDir dir: File) {
+        val file = File(dir, "config.yml")
+        file.writeText("townSpawnTime: 7")
+
+        assertTrue(Config.loadFile(file, logger))
+        assertEquals(7, Config.townSpawnTime)
+    }
+
+    @Test
+    fun `loadFile keeps the current config when the file is malformed`(@TempDir dir: File) {
+        val townUuid = UUID.randomUUID()
+        load(
+            """
+            townSpawnTime: 7
+            warWhitelist:
+              - $townUuid
+            outpostTeleportCost:
+              diamond: 2
+            portWarpTime: 3.0
+            """.trimIndent(),
+        )
+        val file = File(dir, "config.yml")
+        file.writeText("townSpawnTime: [")
+
+        assertFalse(Config.loadFile(file, logger))
+
+        assertEquals(7, Config.townSpawnTime)
+        assertEquals(setOf(townUuid), Config.warWhitelist.toSet())
+        assertTrue(Config.warUseWhitelist)
+        assertEquals(mapOf(Material.DIAMOND to 2), Config.outpostTeleportCost.toMap())
+        assertEquals(60.0, Config.portWarpTime)
+    }
+
+    @Test
+    fun `loadFile keeps the current config when the file is missing`(@TempDir dir: File) {
+        load("townSpawnTime: 7")
+
+        assertFalse(Config.loadFile(File(dir, "config.yml"), logger))
+        assertEquals(7, Config.townSpawnTime)
     }
 }
