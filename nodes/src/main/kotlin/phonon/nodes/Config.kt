@@ -10,13 +10,16 @@ package phonon.nodes
 import org.bukkit.Material
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.file.FileConfiguration
+import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.EntityType
 import phonon.nodes.objects.OreDeposit
 import phonon.nodes.objects.TerritoryResources
+import java.io.File
 import java.nio.file.Paths
 import java.util.EnumMap
 import java.util.EnumSet
 import java.util.UUID
+import java.util.logging.Logger
 
 public object Config {
 
@@ -402,6 +405,24 @@ public object Config {
     // ===================================================
     // Load config
     // ===================================================
+
+    /**
+     * Load config from a file. If the file cannot be read or parsed, logs
+     * the error, leaves the current config unchanged, and returns false.
+     */
+    public fun loadFile(file: File, logger: Logger): Boolean {
+        val config = YamlConfiguration()
+        try {
+            config.load(file)
+        } catch (err: Exception) {
+            logger.severe("Could not load ${file.getName()}, keeping current config: $err")
+            return false
+        }
+
+        Config.load(config)
+        return true
+    }
+
     public fun load(config: FileConfiguration) {
         // engine settings
         Config.disableWorldWhenLoadFails = config.getBoolean("disableWorldWhenLoadFails", Config.disableWorldWhenLoadFails)

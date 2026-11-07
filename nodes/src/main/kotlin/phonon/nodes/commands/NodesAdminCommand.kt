@@ -512,8 +512,11 @@ public class NodesAdminCommand :
 
         val subcommand = args[1].lowercase()
         if (subcommand == "config") {
-            Nodes.reloadConfig()
-            Message.print(sender, "[Nodes] reloaded configs")
+            if (Nodes.reloadConfig()) {
+                Message.print(sender, "[Nodes] reloaded configs")
+            } else {
+                Message.error(sender, "[Nodes] failed to reload config.yml, keeping current config (see server log)")
+            }
         } else if (subcommand == "managers") {
             Nodes.reloadManagers()
             Message.print(sender, "[Nodes] reloaded manager tasks")

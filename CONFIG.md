@@ -2,7 +2,7 @@
 
 All configuration options for the Nodes plugin live in `plugins/nodes/config.yml`. Options are listed in the order they appear in the default configuration file.
 
-Each `Default` below is the value in the default `config.yml`. The plugin writes that file only when none exists, so a key deleted from an existing file uses a built-in value instead. The built-in values match the defaults except for these:
+Each `Default` below is the value in the default `config.yml`. The plugin writes that file only when none exists, so a key deleted from an existing file uses a built-in value after the next server restart. The built-in values match the defaults except for these:
 
 | Key | Built-in value |
 |---|---|
@@ -13,6 +13,10 @@ Each `Default` below is the value in the default `config.yml`. The plugin writes
 | `outpostTeleportCost`, `nationTownTeleportCost`, `globalResources` | Empty |
 
 `/nodesadmin reload config` re-reads the file, but `savePeriod`, `mainPeriodicTick`, `overMaxClaimsReminderPeriod`, and `nametagUpdatePeriod` keep their old timing until `/nodesadmin reload managers` or a server restart.
+
+A key deleted before `/nodesadmin reload config` keeps its last loaded value until a server restart. The exceptions are `portWarpTime`, `outpostTeleportCost`, `nationTownTeleportCost`, `warWhitelist`, `warBlacklist`, `annexBlacklist`, and `allowControlInOccupiedTownList`, which go back to their built-in value on the reload.
+
+If `config.yml` cannot be read or parsed, the plugin logs the error and loads nothing from the file. `/nodesadmin reload config` prints an error and the current values stay in place. At server startup, the built-in values are used.
 
 ---
 
