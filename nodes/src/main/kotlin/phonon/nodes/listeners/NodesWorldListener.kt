@@ -836,6 +836,26 @@ private fun handleCropHarvest(block: Block) {
     }
 }
 
+/**
+ * Whether a player gets hidden ore drops in a territory, from the
+ * allowOreIn* settings. Generic over the town and nation types so the
+ * rule can be tested without a running server.
+ *
+ * Every town comparison requires a non-null town on the territory side,
+ * so a player without a town never matches an unowned or unoccupied
+ * territory through `null === null`.
+ */
+internal fun <T : Any, N : Any> allowsHiddenOre(
+    territoryTown: T?,
+    territoryNation: N?,
+    territoryOccupier: T?,
+    playerTown: T?,
+    playerNation: N?,
+): Boolean = (Config.allowOreInWilderness && territoryTown === null) ||
+    (territoryTown !== null && territoryTown === playerTown) ||
+    (Config.allowOreInNationTowns && territoryNation !== null && territoryNation === playerNation) ||
+    (Config.allowOreInCaptured && territoryOccupier !== null && territoryOccupier === playerTown)
+
 // handle hidden ore generation during mining
 private fun handleHiddenOre(player: Player, block: Block) {
     // ignore hidden ore for silk touch tools
@@ -860,12 +880,7 @@ private fun handleHiddenOre(player: Player, block: Block) {
         val playerTown = Nodes.getTownFromPlayer(player)
         val playerNation = playerTown?.nation
 
-        // conditions allowed for mining ore
-        if ((Config.allowOreInWilderness && territoryTown === null) ||
-            (territoryTown !== null && territoryTown === playerTown) ||
-            (Config.allowOreInNationTowns && territoryNation !== null && territoryNation === playerNation) ||
-            (Config.allowOreInCaptured && territory.occupier === playerTown)
-        ) {
+        if (allowsHiddenOre(territoryTown, territoryNation, territory.occupier, playerTown, playerNation)) {
             val itemDrops = territory.ores.sample(blockY)
 
             // do tax event check
