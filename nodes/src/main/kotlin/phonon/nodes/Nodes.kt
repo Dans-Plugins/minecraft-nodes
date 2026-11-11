@@ -2591,53 +2591,17 @@ public object Nodes {
             return intPart.toInt() + fracAmount
         }
 
-        // tax and kept item rates for occupied territories
+        // share of occupied territory income paid to the occupier
         val taxRate = Config.taxIncomeRate.coerceIn(0.0, 1.0)
-        val keptRate = 1.0 - taxRate
 
         for (town in Nodes.towns.values) {
             try {
-                val thisTownIncome = EnumMap<Material, Double>(Material::class.java) // hard-coded value for this town
-                val townIncomes = HashMap<Town, EnumMap<Material, Double>>()
-
-                // inject this town, to unify claims penalty logic later
-                townIncomes[town] = thisTownIncome
-
-                for (terrId in town.territories) {
-                    val territory = Nodes.getTerritoryFromId(terrId)
-                    if (territory === null) {
-                        continue
-                    }
-
-                    val occupier = territory.occupier
-                    if (occupier != null) {
-                        val occupierIncome = townIncomes.getOrPut(occupier) { EnumMap<Material, Double>(Material::class.java) }
-
-                        // regular item income
-                        for ((material, amount) in territory.income) {
-                            occupierIncome[material] = (occupierIncome[material] ?: 0.0) + (amount * taxRate)
-                            thisTownIncome[material] = (thisTownIncome[material] ?: 0.0) + (amount * keptRate)
-                        }
-
-                        // TODO: 1.12 compatibility? spawn egg income
-                        // for ( (entityType, rate) in territory.incomeSpawnEgg ) {
-                        //     TODO
-                        // }
-                    } else {
-                        // regular item income
-                        for ((material, amount) in territory.income) {
-                            thisTownIncome[material] = (thisTownIncome[material] ?: 0.0) + amount
-                        }
-
-                        // TODO: 1.12 compatibility? spawn egg income
-                        // for ( (entityType, rate) in territory.incomeSpawnEgg ) {
-                        //     TODO
-                        // }
-                    }
-                }
+                val territories = town.territories
+                    .mapNotNull { terrId -> Nodes.getTerritoryFromId(terrId) }
+                    .map { territory -> Pair(territory.occupier, territory.income) }
 
                 // apply income modifiers for each town, then add items to town income chest
-                for ((townForIncome, income) in townIncomes) {
+                val incomeModifierFor = { townForIncome: Town ->
                     var incomeModifier = 1.0
 
                     // over max claims penalty
@@ -2654,13 +2618,11 @@ public object Nodes {
 
                     // we can do any other income modifiers here in the future
 
-                    // add items to town income chest
-                    for ((material, amount) in income) {
-                        val amountInt = rateToAmount(amount * incomeModifier)
-                        if (amountInt > 0) {
-                            Nodes.addToIncome(town, material, amountInt)
-                        }
-                    }
+                    incomeModifier
+                }
+
+                payTerritoryIncome(town, territories, taxRate, incomeModifierFor, ::rateToAmount) { payee, material, amount ->
+                    Nodes.addToIncome(payee, material, amount)
                 }
 
                 // TODO: 1.12 compatibility? spawn egg income
