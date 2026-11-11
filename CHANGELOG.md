@@ -21,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- An occupying town now receives its `taxIncomeRate` share of an occupied territory's income. Previously that share, scaled by the occupier's income modifiers, was paid to the occupied town instead.
 - Players without a town no longer get hidden ore drops in unclaimed territories when `allowOreInWilderness` is `false`, or in a town's unoccupied territories. The `allowOreInCaptured` check matched them because both the territory's occupier and the player's town were empty.
 - `/nodesadmin reload config` now prints an error and keeps the current config when `config.yml` cannot be read or parsed. Previously it reported success and cleared the war and annex lists and the teleport costs, as if the file were empty.
 - `CONFIG.md` now says that a key deleted before `/nodesadmin reload config` keeps its last loaded value until a server restart, and lists the keys that do not.
