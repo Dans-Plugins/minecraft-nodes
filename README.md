@@ -51,7 +51,7 @@ Please fill out a bug report [here](https://github.com/Dans-Plugins/minecraft-no
 
 ## Testing
 
-Unit tests live in `nodes/src/test/kotlin/` and run on JUnit 5 without a server. They cover only config loading so far. The build compiles the Kotlin sources, runs the tests, and runs `ktlintCheck`.
+Unit tests live in `nodes/src/test/kotlin/` and run on JUnit 5 without a server. They cover config loading, the territory income split, the hidden ore rule, chunk coordinate parsing, name validation, and the string helpers used by town serialization. The build compiles the Kotlin sources, runs the tests, and runs `ktlintCheck`.
 
 Linux:
 
