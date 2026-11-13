@@ -60,7 +60,7 @@ Every change is verified in two steps. Automated coverage is still small, so the
 
 The build compiles the Kotlin sources, runs the unit tests, and runs `ktlintCheck`.
 
-Unit tests live in `nodes/src/test/kotlin/`, in the same package as the code they test, and run on JUnit 5 without a server. They cover config loading, the territory income split, the hidden ore rule, chunk coordinate parsing, name validation, and the string helpers used by town serialization. Add a test for code that can run without a live server, such as config parsing and pure logic. To run only the tests, use `./gradlew test` from `nodes/`.
+Unit tests live in `nodes/src/test/kotlin/`, in the same package as the code they test, and run on JUnit 5 without a server. They cover config loading, the territory income split, the hidden ore rule, chunk coordinate parsing, name validation, port save data, the enum-keyed array map, and the string helpers used by town serialization. Add a test for code that can run without a live server, such as config parsing and pure logic. To run only the tests, use `./gradlew test` from `nodes/`.
 
 Linux:
 ```
