@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Added a JUnit 5 test setup for `nodes/`, with first tests for `Config.load`. `./gradlew build` now runs the tests.
 - Added unit tests for `Coord` chunk conversion and `x,z` parsing, the town and nation name checks in `stringInputIsValid` and `sanitizeString`, `estimateNumDigits`, and the list and map string builders and `filterByStart` in `utils/String.kt`.
+- Added unit tests for port chunk coordinates, the JSON saved for ports and port groups and when it is rebuilt, and `EnumArrayMap` lookup, assignment, and copying.
 
 ### Changed
 
