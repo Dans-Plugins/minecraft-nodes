@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added unit tests for `Coord` chunk conversion and `x,z` parsing, the town and nation name checks in `stringInputIsValid` and `sanitizeString`, `estimateNumDigits`, and the list and map string builders and `filterByStart` in `utils/String.kt`.
 - Added unit tests for port chunk coordinates, the JSON saved for ports and port groups and when it is rebuilt, and `EnumArrayMap` lookup, assignment, and copying.
 - Added unit tests for `OreDeposit.merge` and the `OreSampler` height mapping: no drops outside the world, outside an ore's `ymin`–`ymax` range, or from an ore with zero drop chance.
+- Added unit tests for the JSON saved for residents and when it is rebuilt, and for the top-level world and port documents written by `Serializer.worldToJson` and `Serializer.portsToJson`.
 
 ### Changed
 
