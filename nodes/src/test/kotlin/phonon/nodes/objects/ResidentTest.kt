@@ -1,6 +1,7 @@
 package phonon.nodes.objects
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotSame
 import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.Test
@@ -46,7 +47,7 @@ class ResidentTest {
     fun `save state JSON does not include the uuid`() {
         val json = Resident(uuid, "alice").getSaveState().createJsonString()
 
-        assertEquals(false, json.contains(uuid.toString()))
+        assertFalse(json.contains(uuid.toString()))
     }
 
     @Test
