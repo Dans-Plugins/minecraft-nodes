@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Added unit tests for `OreDeposit.merge` and the `OreSampler` height mapping: no drops outside the world, outside an ore's `ymin`–`ymax` range, or from an ore with zero drop chance.
 - Added unit tests for the JSON saved for residents and when it is rebuilt, and for the top-level world and port documents written by `Serializer.worldToJson` and `Serializer.portsToJson`.
 - Added unit tests for resource nodes: how each income, ore, crop, animal, multiplier, neighbor, and claim time attribute changes a territory's resources, the order a node applies its attributes in, and how `DefaultResourceAttributeLoader` reads resource nodes from `world.json`.
+- Added unit tests for `OreBlockCache`, the cache of broken blocks that hidden ore ignores: it holds up to `maxSize` blocks, evicts the oldest block first, and does not move a block to the back of the queue when it is added again.
 
 ### Changed
 
